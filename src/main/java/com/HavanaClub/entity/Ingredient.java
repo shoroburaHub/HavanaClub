@@ -20,13 +20,7 @@ public class Ingredient {
 
 	private String name;
 
-	private double quantity;
-
-	@ManyToMany
-	@JoinTable(name = "ingredient_measuring_system", 
-	joinColumns = @JoinColumn(name = "ingredient_id"), 
-	inverseJoinColumns = @JoinColumn(name = "measuring_system_id"))
-	private List<MeasuringSystem> measuringSystems = new ArrayList<MeasuringSystem>();
+	private String quantity;
 
 	@ManyToMany
 	@JoinTable(name = "drink_ingredient", 
@@ -38,8 +32,7 @@ public class Ingredient {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ingredient(String name, double quantity) {
-		super();
+	public Ingredient(String name, String quantity) {
 		this.name = name;
 		this.quantity = quantity;
 	}
@@ -60,20 +53,19 @@ public class Ingredient {
 		this.name = name;
 	}
 
-	public double getQuantity() {
+	public String getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(double quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
 
-	public List<MeasuringSystem> getMeasuringSystems() {
-		return measuringSystems;
+	public List<Drink> getDrinks() {
+		return drinks;
 	}
 
-	public void setMeasuringSystems(List<MeasuringSystem> measuringSystems) {
-		this.measuringSystems = measuringSystems;
+	public void setDrinks(List<Drink> drinks) {
+		this.drinks = drinks;
 	}
-
 }

@@ -9,7 +9,7 @@ import com.HavanaClub.entity.User;
 
 public interface IngredientService{
 
-	void save(Ingredient ingredient, int idMS);
+	void save(Ingredient ingredient);
 
 	List<Ingredient> findAll();
 
@@ -19,8 +19,6 @@ public interface IngredientService{
 
 	void update(Ingredient ingredient);
 
-	List<Ingredient> ingredientsWithMeasuringSystem();
-	
-	Ingredient findIngredientWithMeasuringSystem(int id);
+
 	
 }

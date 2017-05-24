@@ -3,37 +3,28 @@ package com.HavanaClub.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.service.IngredientService;
-import com.HavanaClub.service.MeasuringSystemService;
 
 @Controller
-public class IngredinetController {
+public class IngredientController {
 	
 	@Autowired
 	private IngredientService ingredientService;
-	@Autowired
-	private MeasuringSystemService measuringSystemService; 
-	
+
 	@GetMapping("/ingredient")
 	public String ingredient(Model model){
-		model.addAttribute("ingredients", ingredientService.ingredientsWithMeasuringSystem());
-		model.addAttribute("measuringSystems", measuringSystemService.findAll());
+		model.addAttribute("ingredients", ingredientService.findAll());
+		model.addAttribute("ingredient", new Ingredient());
 		return "ingredient";
 	}
 	@PostMapping("/ingredient")
-	public String ingredinet(@RequestParam String name,
-							@RequestParam double quantity,
-							@RequestParam int ms){
+	public String ingredient(@ModelAttribute Ingredient ingredient){
 		
-		ingredientService.save(new Ingredient(name, quantity), ms);
-		
-		
+		ingredientService.save(ingredient);
+
 		return "redirect:/ingredient";
 	}
 	
@@ -50,7 +41,7 @@ public class IngredinetController {
 	public String updateIngredient(@PathVariable int id, Model model){
 		
 		Ingredient ingredient = 
-				ingredientService.findIngredientWithMeasuringSystem(id);
+				ingredientService.findOne(id);
 		
 		model.addAttribute("ingredient", ingredient);
 		

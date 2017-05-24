@@ -8,10 +8,6 @@ import com.HavanaClub.entity.User;
 
 public interface UserDao extends JpaRepository<User, Integer> {
 
-//	@Query("select u from User u where u.name=:param1 and u.email=:param2")
-//	User findUserByNameEmail(@Param("param1")String name, @Param("param2")String email);
-	
-	User findByNameAndEmail(String name, String email);
 	
 	@Query("select u from User u left join fetch u.drinks where u.id=:id")
 	User findUserWithDrinks(@Param("id") int id);

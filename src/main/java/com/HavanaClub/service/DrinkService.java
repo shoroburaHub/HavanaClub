@@ -7,7 +7,7 @@ import com.HavanaClub.entity.User;
 
 public interface DrinkService {
 
-	void save(Drink drink, List<Integer> ingredientIds, int countryId);
+	void save(Drink drink);
 
 	List<Drink> findAll();
 
@@ -19,5 +19,8 @@ public interface DrinkService {
 	
 	List<Drink> drinksWithIngredients();
 
-	
+	Drink drinksWithIngredients(int id);
+
+	void updateDrink(int drink_id, int ingredient_id);
+
 }

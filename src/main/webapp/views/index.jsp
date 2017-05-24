@@ -18,12 +18,9 @@
 	<a href="/signUp">sign up</a>
 	<a href="/drink">drink</a>
 	<a href="/ingredient">ingredient</a>
-	<a href="/measuringSystem">measuring system</a>
 	<a href="/country">country</a>
-	<a href="/commodity">commodity</a>
 
 
-	
 </div>
 </body>
 </html>

@@ -1,20 +1,18 @@
 package com.HavanaClub.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import com.HavanaClub.editors.CountryEditor;
+import com.HavanaClub.editors.IngredientEditor;
 import com.HavanaClub.entity.Country;
 import com.HavanaClub.entity.Drink;
+import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.service.CountryService;
 import com.HavanaClub.service.DrinkService;
 import com.HavanaClub.service.IngredientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class DrinkController {
@@ -25,36 +23,27 @@ public class DrinkController {
 	private CountryService countryService;
 	@Autowired
 	private IngredientService ingredientService;
-	
-	private Country country = null;
-	
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder){
+		binder.registerCustomEditor(Country.class, new CountryEditor());
+		binder.registerCustomEditor(Ingredient.class, new IngredientEditor());
+	}
+
 	@GetMapping("/drink")
 	public String drink(Model model){
-		
 		model.addAttribute("drinks", drinkService.drinksWithIngredients());
 		model.addAttribute("countries", countryService.findAll());
 		model.addAttribute("ingredients", ingredientService.findAll());
-		
-		if(country == null){			
-			country = countryService.findAll().get(0);
-		}
-		
-		
-		model.addAttribute("country", country);
-		
+		model.addAttribute("drink", new Drink());
 		return "drink";
 	}
 	
 	@PostMapping("/drink")
-	public String drink(@RequestParam String name, 
-			@RequestParam List<Integer> ingredientIds,
-			@RequestParam int countryId,
-			Model model){
-		
-		country = countryService.findOne(countryId);
-		
-		drinkService.save(new Drink(name), ingredientIds , countryId);
-		
+	public String drink(@ModelAttribute Drink drink){
+
+		drinkService.save(drink);
+
 		return "redirect:/drink";
 	}
 	
@@ -66,7 +55,25 @@ public class DrinkController {
 		return "redirect:/drink";
 		
 	}
-	
+
+	@GetMapping("/updateDrink/{id}")
+	public String updateDrink(@PathVariable int id, Model model){
+
+
+		model.addAttribute("updateDrink", drinkService.drinksWithIngredients(id));
+
+		return "updateDrink";
+	}
+
+	@GetMapping("/updateDrink/{drink_id}/{ingredient_id}")
+	public String updateDrink(@PathVariable int drink_id,
+							  @PathVariable int ingredient_id){
+
+		drinkService.updateDrink(drink_id, ingredient_id);
+
+		return "redirect:/drink";
+
+	}
 	
 	
 	
