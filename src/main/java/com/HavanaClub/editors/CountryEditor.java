@@ -1,9 +1,6 @@
-
-
 package com.HavanaClub.editors;
 
 import com.HavanaClub.entity.Country;
-import com.HavanaClub.service.CountryService;
 
 import java.beans.PropertyEditorSupport;
 
@@ -13,14 +10,12 @@ import java.beans.PropertyEditorSupport;
 public class CountryEditor extends PropertyEditorSupport {
 
     @Override
-    public void setAsText(String idFromJSP) throws IllegalArgumentException {
+    public void setAsText(String idCountryFromJSP) throws IllegalArgumentException {
 
         Country country = new Country();
-
-        country.setId(Integer.parseInt(idFromJSP));
+        country.setId(Integer.valueOf(idCountryFromJSP));
 
         setValue(country);
-
 
     }
 }

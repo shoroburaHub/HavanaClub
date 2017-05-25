@@ -13,6 +13,7 @@ public class IngredientEditor extends PropertyEditorSupport {
     public void setAsText(String text) throws IllegalArgumentException {
 
         Ingredient ingredient = new Ingredient();
+
         ingredient.setId(Integer.parseInt(text));
 
         setValue(ingredient);
