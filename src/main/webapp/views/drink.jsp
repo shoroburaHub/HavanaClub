@@ -10,25 +10,26 @@
 </head>
 <body>
 
-	<sf:form modelAttribute="drink" method="post">
+	<sf:form modelAttribute="drinkDtoCreate" method="post">
 
 		<sf:input path="name"/>
 
-		<sf:select path="country" items="${countries}" itemLabel="name" itemValue="id"/>
+		<sf:select path="countryDto" items="${countriesDtos}" itemLabel="name" itemValue="id"/>
 
-		<sf:checkboxes element="div" path="ingredients" items="${ingredients}" itemLabel="name" itemValue="id"/>
+		<sf:checkboxes element="div" path="ingredientDtos" items="${ingredientsDtos}" itemLabel="name" itemValue="id"/>
 
 		<button>save drink</button>
+
+		<sf:errors path="*"/>
 
 	</sf:form>
 
 
-
 	<ol>
-		<c:forEach var="drink" items="${drinks}">
-			<li>${drink.name}
-				<a href="/deleteDrink/${drink.id}">delete</a> <a
-				href="/updateDrink/${drink.id}">update</a>
+		<c:forEach var="drinkDto" items="${drinksDtos}">
+			<li>${drinkDto.name}
+				<a href="/deleteDrink/${drinkDto.id}">delete</a> <a
+				href="/updateDrink/${drinkDto.id}">update</a>
 			</li>
 		</c:forEach>
 	</ol>

@@ -42,8 +42,8 @@
     <br>
     <br>
     <ol>
-        <c:forEach items="${userDtos}" var="userDto">
-            <li>${userDto.name} ${userDto.email}</li>
+        <c:forEach items="${users}" var="user">
+            <li>${user.name} ${user.email}</li>
         </c:forEach>
     </ol>
 </div>

@@ -2,6 +2,9 @@ package com.HavanaClub.serviceImpl;
 
 import com.HavanaClub.dao.DrinkDao;
 import com.HavanaClub.dao.IngredientDao;
+import com.HavanaClub.dto.DrinkDto;
+import com.HavanaClub.dto.DrinkDtoCreate;
+import com.HavanaClub.dto.DtoUtilMapper;
 import com.HavanaClub.entity.Drink;
 import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.service.DrinkService;
@@ -18,7 +21,23 @@ public class DrinkServiceImpl implements DrinkService {
     @Autowired
     private IngredientDao ingredientDao;
 
-    public void save(Drink drink) {
+    public void save(DrinkDtoCreate drinkDtoCreate) {
+
+        Drink drink = new Drink();
+        drink.setName(drinkDtoCreate.getName());
+
+        drinkDao.saveAndFlush(drink);
+
+        drink.
+                setCountry(DtoUtilMapper.
+                        countryDtoToCounty(drinkDtoCreate.
+                                getCountryDto()));
+
+        drink.
+                setIngredients(DtoUtilMapper
+                        .ingredientsDtosToIngredients(drinkDtoCreate
+                                .getIngredientDtos()));
+
         drinkDao.save(drink);
     }
 

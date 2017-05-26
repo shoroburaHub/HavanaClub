@@ -1,5 +1,6 @@
 package com.HavanaClub.controller;
 
+import com.HavanaClub.dto.*;
 import com.HavanaClub.editors.CountryEditor;
 import com.HavanaClub.editors.IngredientEditor;
 import com.HavanaClub.entity.Country;
@@ -11,6 +12,7 @@ import com.HavanaClub.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,26 +31,47 @@ public class DrinkController {
 
     @InitBinder
     public void init(WebDataBinder binder){
-        binder.registerCustomEditor(Country.class, new CountryEditor());
-        binder.registerCustomEditor(Ingredient.class, new IngredientEditor());
+        binder.registerCustomEditor(CountryDto.class, new CountryEditor());
+        binder.registerCustomEditor(IngredientDto.class, new IngredientEditor());
     }
 
 
     @GetMapping("/drink")
     public String drink(Model model) {
 
-        model.addAttribute("drinks", drinkService.findAll());
-        model.addAttribute("countries", countryService.findAll());
-        model.addAttribute("ingredients", ingredientService.findAll());
-        model.addAttribute("drink", new Drink());
+//        List<Drink> drinks = drinkService.findAll();
+
+//        List<DrinkDto> drinkDtos = new ArrayList<>();
+//
+//        for (Drink drink : drinks) {
+//
+////            DrinkDto drinkDto = new DrinkDto();
+////            drinkDto.setId(drink.getId());
+////            drinkDto.setName(drink.getName());
+//
+//            drinkDtos.add(DtoUtilMapper.drinkToDrinkDto(drink));
+//
+//        }
+
+        model.addAttribute("drinksDtos", DtoUtilMapper.drinksToDrinksDtos(drinkService.findAll()));
+        model.addAttribute("countriesDtos", DtoUtilMapper.countriesToCountriesDtos(countryService.findAll()));
+        model.addAttribute("ingredientsDtos", DtoUtilMapper.ingredientsToingredientsDtos(ingredientService.findAll()));
+        model.addAttribute("drinkDtoCreate", new DrinkDtoCreate());
 
         return "drink";
     }
 
     @PostMapping("/drink")
-    public String drink(@ModelAttribute Drink drink) {
+    public String drink(@ModelAttribute DrinkDtoCreate drinkDtoCreate, BindingResult result) {
 
-        drinkService.save(drink);
+        if(result.hasErrors()){
+            return "drink";
+        }
+
+
+//        System.out.println(drinkDtoCreate);
+
+        drinkService.save(drinkDtoCreate);
 
         return "redirect:/drink";
     }

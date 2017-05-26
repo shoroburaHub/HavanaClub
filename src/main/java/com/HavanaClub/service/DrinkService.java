@@ -2,12 +2,14 @@ package com.HavanaClub.service;
 
 import java.util.List;
 
+import com.HavanaClub.dto.DrinkDto;
+import com.HavanaClub.dto.DrinkDtoCreate;
 import com.HavanaClub.entity.Drink;
 import com.HavanaClub.entity.User;
 
 public interface DrinkService {
 
-	void save(Drink drink);
+	void save(DrinkDtoCreate drinkDtoCreate);
 
 	List<Drink> findAll();
 

@@ -1,6 +1,8 @@
 package com.HavanaClub.dto;
 
-import com.HavanaClub.entity.User;
+import com.HavanaClub.entity.Country;
+import com.HavanaClub.entity.Drink;
+import com.HavanaClub.entity.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,28 +12,77 @@ import java.util.List;
  */
 public class DtoUtilMapper {
 
-    public static UserDto userToUserDto(User user){
-
-        UserDto userDto = new UserDto();
-        userDto.setName(user.getName());
-        userDto.setEmail(user.getEmail());
-
-        return userDto;
+    public static DrinkDto drinkToDrinkDto(Drink drink){
+        DrinkDto drinkDto = new DrinkDto();
+        drinkDto.setId(drink.getId());
+        drinkDto.setName(drink.getName());
+        return drinkDto;
     }
 
-    public static List<UserDto> usersToUsersDtos(List<User> users){
+    public static List<DrinkDto> drinksToDrinksDtos(List<Drink> drinks){
 
-        List<UserDto> usersDtos = new ArrayList<>();
+        List<DrinkDto> drinkDtos = new ArrayList<>();
 
-        for (User user : users) {
+        for (Drink drink : drinks) {
 
-            usersDtos.add(userToUserDto(user));
+            drinkDtos.add(DtoUtilMapper.drinkToDrinkDto(drink));
 
         }
 
-        return usersDtos;
+        return drinkDtos;
+    }
+
+
+    public static CountryDto countryToCountryDto(Country country){
+        return new CountryDto(country.getId(), country.getName());
+    }
+
+    public static List<CountryDto> countriesToCountriesDtos(List<Country> countries){
+        List<CountryDto> countryDtos = new ArrayList<>();
+        for (Country country : countries) {
+            countryDtos.add(countryToCountryDto(country));
+        }
+        return countryDtos;
+    }
+
+    public static IngredientDto ingredientToingredientDto(Ingredient ingredient){
+        return new IngredientDto(ingredient.getId(), ingredient.getName());
+    }
+
+    public static List<IngredientDto> ingredientsToingredientsDtos(List<Ingredient> ingredients){
+        List<IngredientDto> ingredientDtos = new ArrayList<>();
+        for (Ingredient ingredient: ingredients) {
+            ingredientDtos.add(ingredientToingredientDto(ingredient));
+        }
+        return ingredientDtos;
+    }
+
+    public static Country countryDtoToCounty(CountryDto countryDto){
+
+        Country country = new Country();
+        country.setId(countryDto.getId());
+
+        return country;
+    }
+
+    public static List<Ingredient> ingredientsDtosToIngredients(List<IngredientDto> ingredientDtos){
+
+        List<Ingredient> ingredients = new ArrayList<>();
+
+        for (IngredientDto ingredientDto : ingredientDtos) {
+
+            Ingredient ingredient = new Ingredient();
+
+            ingredient.setId(ingredientDto.getId());
+
+            ingredients.add(ingredient);
+
+        }
+
+        return ingredients;
 
     }
+
 
 
 }
