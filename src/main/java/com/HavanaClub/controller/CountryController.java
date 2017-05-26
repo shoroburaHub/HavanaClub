@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class CountryController {
 
@@ -20,7 +23,7 @@ public class CountryController {
         return "country";
     }
 
-    @PostMapping("/saveCountry")
+    @PostMapping("/country")
     public String country(@ModelAttribute Country country) {
 
         countryService.save(country);

@@ -27,7 +27,7 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" />
 
-
+    <bean scope="session"></bean>
 
 
 </beans>

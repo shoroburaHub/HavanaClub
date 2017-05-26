@@ -14,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class DrinkController {
 
@@ -33,10 +36,12 @@ public class DrinkController {
 
     @GetMapping("/drink")
     public String drink(Model model) {
-        model.addAttribute("drinks", drinkService.drinksWithIngredients());
+
+        model.addAttribute("drinks", drinkService.findAll());
         model.addAttribute("countries", countryService.findAll());
         model.addAttribute("ingredients", ingredientService.findAll());
         model.addAttribute("drink", new Drink());
+
         return "drink";
     }
 

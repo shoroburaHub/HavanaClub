@@ -26,10 +26,8 @@
 
 	<ol>
 		<c:forEach var="drink" items="${drinks}">
-			<li>${drink.name}${drink.country.name} <c:forEach
-					var="ingredient" items="${drink.ingredients}">
-				${ingredient.name}
-			</c:forEach> <a href="/deleteDrink/${drink.id}">delete</a> <a
+			<li>${drink.name}
+				<a href="/deleteDrink/${drink.id}">delete</a> <a
 				href="/updateDrink/${drink.id}">update</a>
 			</li>
 		</c:forEach>

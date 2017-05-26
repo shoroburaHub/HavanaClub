@@ -8,28 +8,54 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+	<link rel="stylesheet" href="/bootstrap/bootstrap-theme.css">
+	<link rel="stylesheet" href="/bootstrap/bootstrap.css">
+	<link rel="stylesheet" href="/css/header.css">
+	<script src="/js/header.js"></script>
 </head>
 <body>
 
- 	<sf:form modelAttribute="country" method="post">
 
-		<sf:input path="name"/>
+	<div class="container">
 
-		<button>save country</button>
-	</sf:form>
 
-	<%--<form action="/country" method="post">
-		<input name="nameCountry">
-		<button>save country</button>
-	</form>--%>
+		<div class="panel">
+			<sf:form modelAttribute="country" method="post">
+				<div style="display: flex; justify-content: space-around ">
 
-	
-	<ol>
-		<c:forEach var="country" items="${countries}">
-			<li>${country.name} <a href="/deleteCountry/${country.id}">delete</a></li>
-		</c:forEach>
-	</ol>
-	
-	
+					<div class="form-group">
+						<label class="sr-only" for="exampleInputEmail3">Email address</label>
+						<sf:input path="name" type="text" class="form-control" id="exampleInputEmail3" placeholder="country name" />
+					</div>
+					<div class="form-group">
+						<button class="btn btn-default">save country</button>
+					</div>
+				</div>
+			</sf:form>
+			<table class="table table-hover">
+				<thead>
+				<tr>
+					<th>name</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="country" items="${countries}">
+					<tr>
+						<td>
+								${country.name}
+						</td>
+						<td>
+							<a href="deleteCountry/${country.id}">del</a>
+						</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+
 </body>
 </html>

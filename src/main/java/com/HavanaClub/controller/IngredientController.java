@@ -20,6 +20,7 @@ public class IngredientController {
 		model.addAttribute("ingredient", new Ingredient());
 		return "ingredient";
 	}
+
 	@PostMapping("/ingredient")
 	public String ingredient(@ModelAttribute Ingredient ingredient){
 		
