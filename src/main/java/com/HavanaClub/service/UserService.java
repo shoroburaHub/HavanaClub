@@ -17,5 +17,5 @@ public interface UserService {
 	void update(User user);
 
 	User findUserWithOrders(int id);
-	
+
 }

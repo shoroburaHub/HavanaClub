@@ -23,4 +23,6 @@ public interface DrinkService {
 
 	void updateDrink(int drink_id, int ingredient_id);
 
+	Drink drinkWithAllInfo(int id);
+
 }

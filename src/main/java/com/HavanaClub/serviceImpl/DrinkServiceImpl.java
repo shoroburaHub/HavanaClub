@@ -60,4 +60,20 @@ public class DrinkServiceImpl implements DrinkService {
             ingredientDao.save(ingredient);
         }
     }
+
+
+    @Override
+    public Drink drinkWithAllInfo(int id) {
+
+        Drink  drink = drinkDao.drinksWithIngredients(id);
+        Drink drink1 = drinkDao.drinksWithUsers(id);
+
+        Drink returnedDrink = new Drink();
+        returnedDrink.setId(drink.getId());
+        returnedDrink.setIngredients(drink.getIngredients());
+        returnedDrink.setUsers(drink1.getUsers());
+
+
+        return returnedDrink;
+    }
 }
