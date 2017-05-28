@@ -2,6 +2,8 @@ package com.HavanaClub.serviceImpl;
 
 import java.util.List;
 
+import com.HavanaClub.dao.DrinkDao;
+import com.HavanaClub.entity.Drink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,11 @@ public class CountryServiceImpl implements CountryService{
 
 	@Autowired
 	private CountryDao countryDao;
-	
+	@Autowired
+	private DrinkDao drinkDao;
+
+
 	public void save(Country country) {
-		country.setName(country.getName().toUpperCase());
 		countryDao.save(country);
 	}
 
@@ -29,6 +33,16 @@ public class CountryServiceImpl implements CountryService{
 	}
 
 	public void delete(int id) {
+
+		Country country = countryDao.countryWithDrinks(id);
+
+		for (Drink drink : country.getDrinks()) {
+
+			drink.setCountry(null);
+			drinkDao.saveAndFlush(drink);
+
+		}
+
 		countryDao.delete(id);
 	}
 

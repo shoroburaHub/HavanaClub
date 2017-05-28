@@ -1,30 +1,28 @@
 package com.HavanaClub.service;
 
-import java.util.List;
-
-import com.HavanaClub.dto.DrinkDto;
-import com.HavanaClub.dto.DrinkDtoCreate;
 import com.HavanaClub.entity.Drink;
-import com.HavanaClub.entity.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public interface DrinkService {
 
-	void save(DrinkDtoCreate drinkDtoCreate);
+    void save(Drink drink, ArrayList<Integer> ids);
 
-	List<Drink> findAll();
+    List<Drink> findAll();
 
-	Drink findOne(int id);
+    Drink findOne(int id);
 
-	void delete(int id);
+    void delete(int id);
 
-	void update(Drink drink);
-	
-	List<Drink> drinksWithIngredients();
+    void update(Drink drink);
 
-	Drink drinksWithIngredients(int id);
+    List<Drink> drinksWithIngredients();
 
-	void updateDrink(int drink_id, int ingredient_id);
+    Drink drinksWithIngredients(int id);
 
-	Drink drinkWithAllInfo(int id);
+    void updateDrink(int drink_id, int ingredient_id);
+
+    Drink drinkWithAllInfo(int id);
 
 }

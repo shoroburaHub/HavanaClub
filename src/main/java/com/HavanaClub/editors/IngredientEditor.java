@@ -1,6 +1,5 @@
 package com.HavanaClub.editors;
 
-import com.HavanaClub.dto.IngredientDto;
 import com.HavanaClub.entity.Ingredient;
 
 import java.beans.PropertyEditorSupport;
@@ -13,11 +12,11 @@ public class IngredientEditor extends PropertyEditorSupport {
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
 
-        IngredientDto ingredientDto = new IngredientDto();
+        Ingredient ingredient = new Ingredient();
 
-        ingredientDto.setId(Integer.parseInt(text));
+        ingredient.setId(Integer.parseInt(text));
 
-        setValue(ingredientDto);
+        setValue(ingredient);
 
     }
 }

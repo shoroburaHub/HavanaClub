@@ -2,15 +2,14 @@ package com.HavanaClub.serviceImpl;
 
 import com.HavanaClub.dao.DrinkDao;
 import com.HavanaClub.dao.IngredientDao;
-import com.HavanaClub.dto.DrinkDto;
-import com.HavanaClub.dto.DrinkDtoCreate;
-import com.HavanaClub.dto.DtoUtilMapper;
 import com.HavanaClub.entity.Drink;
 import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.service.DrinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,22 +20,16 @@ public class DrinkServiceImpl implements DrinkService {
     @Autowired
     private IngredientDao ingredientDao;
 
-    public void save(DrinkDtoCreate drinkDtoCreate) {
 
-        Drink drink = new Drink();
-        drink.setName(drinkDtoCreate.getName());
+    public void save(Drink drink, ArrayList<Integer> ids) {
 
         drinkDao.saveAndFlush(drink);
 
-        drink.
-                setCountry(DtoUtilMapper.
-                        countryDtoToCounty(drinkDtoCreate.
-                                getCountryDto()));
-
-        drink.
-                setIngredients(DtoUtilMapper
-                        .ingredientsDtosToIngredients(drinkDtoCreate
-                                .getIngredientDtos()));
+        for (Integer id : ids) {
+            Ingredient ingredient = ingredientDao.ingredientWirthDrinks(id);
+            ingredient.getDrinks().add(drink);
+            ingredientDao.save(ingredient);
+        }
 
         drinkDao.save(drink);
     }
@@ -73,7 +66,7 @@ public class DrinkServiceImpl implements DrinkService {
 
         for (Ingredient ingredient : drink.getIngredients()) {
 
-            if(ingredient.getId() == ingredient_id){
+            if (ingredient.getId() == ingredient_id) {
                 ingredient.setDrinks(null);
             }
             ingredientDao.save(ingredient);
@@ -84,7 +77,7 @@ public class DrinkServiceImpl implements DrinkService {
     @Override
     public Drink drinkWithAllInfo(int id) {
 
-        Drink  drink = drinkDao.drinksWithIngredients(id);
+        Drink drink = drinkDao.drinksWithIngredients(id);
         Drink drink1 = drinkDao.drinksWithUsers(id);
 
         Drink returnedDrink = new Drink();

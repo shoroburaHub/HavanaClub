@@ -1,5 +1,7 @@
 package com.HavanaClub.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,10 @@ public class Drink {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
+    private String drinkName;
+
+    @Type(type="text")
+    private String recipe;
 
     @ManyToOne
     private Country country;
@@ -35,9 +40,9 @@ public class Drink {
         // TODO Auto-generated constructor stub
     }
 
-    public Drink(String name) {
+    public Drink(String drinkName) {
         super();
-        this.name = name;
+        this.drinkName = drinkName;
     }
 
     public int getId() {
@@ -48,12 +53,12 @@ public class Drink {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDrinkName() {
+        return drinkName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDrinkName(String drinkName) {
+        this.drinkName = drinkName;
     }
 
     public Country getCountry() {
@@ -88,5 +93,22 @@ public class Drink {
         this.ingredients = ingredients;
     }
 
+    public String getRecipe() {
+        return recipe;
+    }
 
+    public void setRecipe(String recipe) {
+        this.recipe = recipe;
+    }
+
+    @Override
+    public String toString() {
+        return "Drink{" +
+                "id=" + id +
+                ", drinkName='" + drinkName + '\'' +
+                ", recipe='" + recipe + '\'' +
+                ", country=" + country +
+                ", ingredients=" + ingredients +
+                '}';
+    }
 }

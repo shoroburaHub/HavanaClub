@@ -1,6 +1,5 @@
 package com.HavanaClub.controller;
 
-import com.HavanaClub.dto.*;
 import com.HavanaClub.editors.CountryEditor;
 import com.HavanaClub.editors.IngredientEditor;
 import com.HavanaClub.entity.Country;
@@ -16,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,50 +31,27 @@ public class DrinkController {
 
     @InitBinder
     public void init(WebDataBinder binder){
-        binder.registerCustomEditor(CountryDto.class, new CountryEditor());
-        binder.registerCustomEditor(IngredientDto.class, new IngredientEditor());
+        binder.registerCustomEditor(Country.class, new CountryEditor());
     }
 
 
     @GetMapping("/drink")
     public String drink(Model model) {
 
-//        List<Drink> drinks = drinkService.findAll();
-
-//        List<DrinkDto> drinkDtos = new ArrayList<>();
-//
-//        for (Drink drink : drinks) {
-//
-////            DrinkDto drinkDto = new DrinkDto();
-////            drinkDto.setId(drink.getId());
-////            drinkDto.setName(drink.getName());
-//
-//            drinkDtos.add(DtoUtilMapper.drinkToDrinkDto(drink));
-//
-//        }
-
-        model.addAttribute("drinksDtos", DtoUtilMapper.drinksToDrinksDtos(drinkService.findAll()));
-        model.addAttribute("countriesDtos", DtoUtilMapper.countriesToCountriesDtos(countryService.findAll()));
-        model.addAttribute("ingredientsDtos", DtoUtilMapper.ingredientsToingredientsDtos(ingredientService.findAll()));
-        model.addAttribute("drinkDtoCreate", new DrinkDtoCreate());
+        model.addAttribute("drinks", drinkService.drinksWithIngredients());
+        model.addAttribute("countries", countryService.findAll());
+        model.addAttribute("ingredients", ingredientService.findAll());
+        model.addAttribute("drink", new Drink());
 
         return "drink";
     }
 
     @PostMapping("/drink")
-    public String drink(@ModelAttribute DrinkDtoCreate drinkDtoCreate, BindingResult result) {
+    public String drink(@ModelAttribute Drink drink, @RequestParam ArrayList<Integer> countryIds) {
 
-        if(result.hasErrors()){
-            return "drink";
-        }
+            drinkService.save(drink, countryIds);
 
-
-//        System.out.println(drinkDtoCreate);
-
-        drinkService.save(drinkDtoCreate);
-
-
-        return "redirect:/drink";
+            return "redirect:/drink";
     }
 
     @GetMapping("/deleteDrink/{id}")

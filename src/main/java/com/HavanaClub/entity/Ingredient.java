@@ -18,9 +18,7 @@ public class Ingredient {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String name;
-
-	private String quantity;
+	private String ingredientName;
 
 	@ManyToMany
 	@JoinTable(name = "drink_ingredient", 
@@ -32,9 +30,12 @@ public class Ingredient {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ingredient(String name, String quantity) {
-		this.name = name;
-		this.quantity = quantity;
+	public Ingredient(String ingredientName) {
+		this.ingredientName = ingredientName;
+	}
+
+	public Ingredient(int id){
+		this.id = id;
 	}
 
 	public int getId() {
@@ -45,20 +46,12 @@ public class Ingredient {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getIngredientName() {
+		return ingredientName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(String quantity) {
-		this.quantity = quantity;
+	public void setIngredientName(String ingredientName) {
+		this.ingredientName = ingredientName;
 	}
 
 	public List<Drink> getDrinks() {
@@ -67,5 +60,13 @@ public class Ingredient {
 
 	public void setDrinks(List<Drink> drinks) {
 		this.drinks = drinks;
+	}
+
+	@Override
+	public String toString() {
+		return "Ingredient{" +
+				"id=" + id +
+				", ingredientName='" + ingredientName + '\'' +
+				'}';
 	}
 }

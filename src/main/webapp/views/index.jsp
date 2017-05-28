@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,10 +14,7 @@
     <script src="/js/header.js"></script>
 </head>
 <body>
-<h1 style="text-align: center;">index</h1>
-
 <div>
-
 
 
     <header class="header" role="banner">
@@ -40,12 +37,37 @@
     <br>
     <br>
     <br>
-    <br>
-    <ol>
-        <c:forEach items="${users}" var="user">
-            <li>${user.name} ${user.email}</li>
-        </c:forEach>
-    </ol>
+
+    <div class="container">
+
+        <div id="products" class="row list-group">
+
+            <c:forEach var="drink" items="${drinks}">
+
+
+                <div class="item  col-xs-5 col-lg-4">
+                    <div class="thumbnail">
+                        <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt=""/>
+                        <div class="caption">
+                            <h4 class="group inner list-group-item-heading">
+                                    ${drink.drinkName}</h4>
+                            <p class="group inner list-group-item-text"></p>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p class="lead">
+                                        $21.000</p>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </c:forEach>
+        </div>
+    </div>
 </div>
 </body>
 </html>
