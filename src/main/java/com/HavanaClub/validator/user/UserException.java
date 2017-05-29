@@ -1,4 +1,4 @@
-package com.HavanaClub.validator.UserValidator;
+package com.HavanaClub.validator.user;
 
 /**
  * Created by admin on 5/29/2017.

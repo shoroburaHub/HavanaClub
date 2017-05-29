@@ -46,9 +46,10 @@ public class DrinkController {
     }
 
     @PostMapping("/drink")
-    public String drink(@ModelAttribute Drink drink, @RequestParam ArrayList<Integer> countryIds) {
+    public String drink(@ModelAttribute Drink drink,
+                        @RequestParam ArrayList<Integer> ingredientsIds) {
 
-            drinkService.save(drink, countryIds);
+            drinkService.save(drink, ingredientsIds);
 
             return "redirect:/drink";
     }
@@ -78,6 +79,12 @@ public class DrinkController {
         drinkService.updateDrink(drink_id, ingredient_id);
 
         return "redirect:/drink";
+    }
+
+    @GetMapping("/recipe/{id}")
+    public String recipe(Model model, @PathVariable int id){
+        model.addAttribute("drink", drinkService.drinksWithIngredients());
+        return "drinkFull";
     }
 
 

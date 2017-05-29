@@ -2,7 +2,7 @@ package com.HavanaClub.controller;
 
 import com.HavanaClub.entity.User;
 import com.HavanaClub.service.UserService;
-import com.HavanaClub.validator.UserValidator.UserValidatorMessages;
+import com.HavanaClub.validator.user.UserValidationMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,22 +24,22 @@ public class UserController {
 
     @PostMapping("/signUp")
     public String signUp(@ModelAttribute User user, Model model) {
-
         try {
             userService.save(user);
         } catch (Exception e) {
-
-            if (e.getMessage().equals(UserValidatorMessages.EMPTY_USERNAME_FIELD) ||
-                    e.getMessage().equals(UserValidatorMessages.USERNAME_ALREADY_EXIST)) {
-
+            if(e.getMessage().equals(UserValidationMessages.EMPTY_USERNAME_FIELD) ||
+                    e.getMessage().equals(UserValidationMessages.USERNAME_ALREADY_EXIST)){
                 model.addAttribute("usernameException", e.getMessage());
-
+            }else if(e.getMessage().equals(UserValidationMessages.EMPTY_EMAIL_FIELD)||
+                    e.getMessage().equals(UserValidationMessages.EMAIL_ALREADY_EXIST)||
+                    e.getMessage().equals(UserValidationMessages.WRONG_EMAIL)){
+                model.addAttribute("emailException", e.getMessage());
+            }else if(e.getMessage().equals(UserValidationMessages.EMPTY_PASSWORD_FIELD)||
+                    e.getMessage().equals(UserValidationMessages.TOO_SHORT_PASSWORD)){
+                model.addAttribute("passwordException", e.getMessage());
             }
-
             return "signUp";
-
         }
-
         return "redirect:/";
     }
 

@@ -22,9 +22,11 @@
     <div class="tabs-content">
         <div id="signup-tab-content" class="active">
             <form:form modelAttribute="user" class="signup-form" method="post">
-                <span style="color: red">${usernameException}</span>
-                <form:input path="name" type="text" class="input" id="user_name" autocomplete="off" placeholder="${usernameException}Username"/>
-                <form:input path="email" type="email" class="input" id="user_email" autocomplete="off" placeholder="Email"/>
+                <h3 style="text-align: center;color: red">${usernameException}</h3>
+                <form:input path="name" type="text" class="input" id="user_name" autocomplete="off" placeholder="Username"/>
+                <h3 style="text-align: center;color: red">${emailException}</h3>
+                <form:input path="email" type="text" class="input" id="user_email" autocomplete="off" placeholder="Email"/>
+                <h3 style="text-align: center;color: red">${passwordException}</h3>
                 <form:input path="password" type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password"/>
                 <input type="submit" class="button" value="Sign Up">
             </form:form><!--.login-form-->
