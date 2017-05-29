@@ -34,7 +34,6 @@ public class DrinkController {
         binder.registerCustomEditor(Country.class, new CountryEditor());
     }
 
-
     @GetMapping("/drink")
     public String drink(Model model) {
 
@@ -79,7 +78,6 @@ public class DrinkController {
         drinkService.updateDrink(drink_id, ingredient_id);
 
         return "redirect:/drink";
-
     }
 
 

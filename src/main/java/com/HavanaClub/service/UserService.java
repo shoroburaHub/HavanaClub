@@ -6,7 +6,7 @@ import com.HavanaClub.entity.User;
 
 public interface UserService {
 
-	void save(User user);
+	void save(User user) throws Exception;
 
 	List<User> findAll();
 
@@ -17,5 +17,7 @@ public interface UserService {
 	void update(User user);
 
 	User findUserWithOrders(int id);
+
+	User findByName(String name);
 
 }

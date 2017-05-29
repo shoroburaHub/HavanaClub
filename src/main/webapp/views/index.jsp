@@ -43,11 +43,8 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>name</th>
+                <th>drink name</th>
                 <th>ingredients</th>
-                <th>recipe</th>
-                <th>delete</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -62,11 +59,7 @@
                         </c:forEach>
                     </td>
                     <td>
-                            ${drink.recipe}
-                    </td>
-
-                    <td>
-                        <a href="deleteDrink/${drink.id}">delete</a>
+                        <a href="recipe/${drink.id}">recipe</a>
                     </td>
                 </tr>
             </c:forEach>

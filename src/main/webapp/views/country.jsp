@@ -48,6 +48,7 @@
 
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                    ${nameException}
                     <sf:input path="name" type="text" class="form-control" id="exampleInputEmail3"
                               placeholder="country name"/>
                 </div>

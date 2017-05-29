@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,12 +21,13 @@
 
     <div class="tabs-content">
         <div id="signup-tab-content" class="active">
-            <form class="signup-form" action="/signUp" method="post">
-                <input name="name" type="text" class="input" id="user_name" autocomplete="off" placeholder="Username">
-                <input name="email" type="email" class="input" id="user_email" autocomplete="off" placeholder="Email">
-                <input name="password" type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
+            <form:form modelAttribute="user" class="signup-form" method="post">
+                <span style="color: red">${usernameException}</span>
+                <form:input path="name" type="text" class="input" id="user_name" autocomplete="off" placeholder="${usernameException}Username"/>
+                <form:input path="email" type="email" class="input" id="user_email" autocomplete="off" placeholder="Email"/>
+                <form:input path="password" type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password"/>
                 <input type="submit" class="button" value="Sign Up">
-            </form><!--.login-form-->
+            </form:form><!--.login-form-->
             <div class="help-text">
                 <p>By signing up, you agree to our</p>
                 <p><a href="#">Terms of service</a></p>

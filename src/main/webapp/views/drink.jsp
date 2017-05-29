@@ -50,13 +50,12 @@
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                    <sf:input path="recipe" type="text" class="form-control" id="exampleInputEmail3"
+                    <sf:textarea path="recipe" type="text" class="form-control" id="exampleInputEmail3"
                               placeholder="recipe"/>
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail3">Email address</label>
                     <select multiple name="countryIds" type="text" class="form-control" id="exampleInputEmail3">
-                        <option>choose ingredients</option>
                         <c:forEach var="ingredient" items="${ingredients}">
                             <option value="${ingredient.id}">${ingredient.ingredientName}</option>
                         </c:forEach>
