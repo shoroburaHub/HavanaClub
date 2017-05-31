@@ -8,37 +8,12 @@
     <title>Insert title here</title>
 
 
-    <link rel="stylesheet" href="/bootstrap/bootstrap-theme.css">
-    <link rel="stylesheet" href="/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <script src="/js/header.js"></script>
 </head>
 <body>
 <div>
 
 
-    <header class="header" role="banner">
-        <nav>
-            <ul>
-                <li class="active"><a href="/">Home</a>
-                </li>
-                <li><a href="/signUp">sign up</a>
-                </li>
-                <li><a href="/drink">drinks</a>
-                </li>
-                <li><a href="/ingredient">ingredients</a>
-                </li>
-                <li><a href="/country">countries</a>
-                </li>
-                <li><a href="/try">try</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <br>
-    <br>
-    <br>
-    <br>
+
 
     <div class="container">
 

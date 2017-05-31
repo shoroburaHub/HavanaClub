@@ -37,7 +37,7 @@ public class DrinkController {
         model.addAttribute("ingredients", ingredientService.findAll());
         model.addAttribute("drink", new Drink());
 
-        return "drink";
+        return "views-admin-drink";
     }
 
     @PostMapping("/drink")
@@ -58,15 +58,6 @@ public class DrinkController {
 
     }
 
-    @GetMapping("/updateDrink/{id}")
-    public String updateDrink(@PathVariable int id, Model model) {
-
-
-        model.addAttribute("updateDrink", drinkService.drinkWithIngredients(id));
-
-        return "updateDrink";
-    }
-
     @GetMapping("/updateDrink/{drink_id}/{ingredient_id}")
     public String updateDrink(@PathVariable int drink_id,
                               @PathVariable int ingredient_id) {
@@ -75,12 +66,5 @@ public class DrinkController {
 
         return "redirect:/drink";
     }
-
-    @GetMapping("/recipe/{id}")
-    public String recipe(Model model, @PathVariable int id){
-        model.addAttribute("drink", drinkService.drinkWithIngredients(id));
-        return "drinkFull";
-    }
-
 
 }

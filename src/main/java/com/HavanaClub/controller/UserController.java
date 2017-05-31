@@ -19,7 +19,7 @@ public class UserController {
     @GetMapping("/signUp")
     public String signUp(Model model) {
         model.addAttribute("user", new User());
-        return "signUp";
+        return "views-user-signUp";
     }
 
     @PostMapping("/signUp")
@@ -38,7 +38,7 @@ public class UserController {
                     e.getMessage().equals(UserValidationMessages.TOO_SHORT_PASSWORD)){
                 model.addAttribute("passwordException", e.getMessage());
             }
-            return "signUp";
+            return "views-user-signUp";
         }
         return "redirect:/";
     }

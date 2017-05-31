@@ -20,11 +20,14 @@ public class CountryController {
     public String country(Model model) {
         model.addAttribute("countries", countryService.findAll());
         model.addAttribute("country", new Country());
-        return "country";
+        return "views-admin-country";
     }
 
     @PostMapping("/country")
     public String country(@ModelAttribute Country country, Model model) {
+
+
+
         countryService.save(country);
 
 

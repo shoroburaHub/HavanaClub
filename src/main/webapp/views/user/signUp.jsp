@@ -1,17 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Insert title here</title>
-    <link rel="stylesheet" type="text/css" href="/css/signUp.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/js/signUp.js"></script>
-</head>
-<body>
 
+<link rel="stylesheet" type="text/css" href="/css/signUp.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/signUp.js"></script>
 
 <div class="form-wrap">
     <div class="tabs">
@@ -23,17 +16,16 @@
         <div id="signup-tab-content" class="active">
             <form:form modelAttribute="user" class="signup-form" method="post">
                 <h3 style="text-align: center;color: red">${usernameException}</h3>
-                <form:input path="name" type="text" class="input" id="user_name" autocomplete="off" placeholder="Username"/>
+                <form:input path="name" type="text" class="input" id="user_name" autocomplete="off"
+                            placeholder="Username"/>
                 <h3 style="text-align: center;color: red">${emailException}</h3>
-                <form:input path="email" type="text" class="input" id="user_email" autocomplete="off" placeholder="Email"/>
+                <form:input path="email" type="text" class="input" id="user_email" autocomplete="off"
+                            placeholder="Email"/>
                 <h3 style="text-align: center;color: red">${passwordException}</h3>
-                <form:input path="password" type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password"/>
+                <form:input path="password" type="password" class="input" id="user_pass" autocomplete="off"
+                            placeholder="Password"/>
                 <input type="submit" class="button" value="Sign Up">
             </form:form><!--.login-form-->
-            <div class="help-text">
-                <p>By signing up, you agree to our</p>
-                <p><a href="#">Terms of service</a></p>
-            </div><!--.help-text-->
         </div><!--.signup-tab-content-->
 
         <div id="login-tab-content">
@@ -45,11 +37,7 @@
 
                 <input type="submit" class="button" value="Login">
             </form><!--.login-form-->
-            <div class="help-text">
-                <p><a href="#">Forget your password?</a></p>
-            </div><!--.help-text-->
         </div><!--.login-tab-content-->
     </div><!--.tabs-content-->
-</div><!--.form-wrap-->
-</body>
-</html>
+</div>
+<!--.form-wrap-->

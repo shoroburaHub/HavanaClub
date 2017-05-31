@@ -18,7 +18,7 @@ public class IngredientController {
 	public String ingredient(Model model){
 		model.addAttribute("ingredients", ingredientService.findAll());
 		model.addAttribute("ingredient", new Ingredient());
-		return "ingredient";
+		return "views-admin-ingredient";
 	}
 
 	@PostMapping("/ingredient")
