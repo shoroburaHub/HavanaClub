@@ -7,7 +7,6 @@ import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.service.DrinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,13 +49,50 @@ public class DrinkServiceImpl implements DrinkService {
         drinkDao.save(drink);
     }
 
-    public List<Drink> drinksWithIngredients() {
-        return drinkDao.drinksWithIngredients();
+    public List<Drink> drinkWithIngredients() {
+
+        List<Drink> drinks =drinkDao.drinksWithIngredients();
+
+        for (Drink drink : drinks) {
+
+            String recipe = drink.getRecipe();
+
+            recipe = recipe.replaceAll("-?\\d+\\.", "_");
+
+            String[] line = recipe.split("_");
+
+            recipe = "";
+
+            for (int i = 1; i < line.length; i++) {
+                recipe += i +". " + line[i].trim()+"<br>";
+            }
+
+            drink.setRecipe(recipe);
+
+        }
+
+        return drinks;
     }
 
     @Override
-    public Drink drinksWithIngredients(int id) {
-        return drinkDao.drinksWithIngredients(id);
+    public Drink drinkWithIngredients(int id) {
+        Drink drink = drinkDao.drinksWithIngredients(id);
+
+        String recipe = drink.getRecipe();
+
+        recipe = recipe.replaceAll("-?\\d+\\.", "_");
+
+        String[] line = recipe.split("_");
+
+        recipe = "";
+
+        for (int i = 1; i < line.length; i++) {
+            recipe += i +". " + line[i].trim()+"<br>";
+        }
+
+        drink.setRecipe(recipe);
+
+        return drink;
     }
 
     @Override
@@ -84,7 +120,6 @@ public class DrinkServiceImpl implements DrinkService {
         returnedDrink.setId(drink.getId());
         returnedDrink.setIngredients(drink.getIngredients());
         returnedDrink.setUsers(drink1.getUsers());
-
 
         return returnedDrink;
     }

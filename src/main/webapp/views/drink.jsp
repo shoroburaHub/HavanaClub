@@ -40,7 +40,6 @@
 
     <div class="panel">
         <sf:form modelAttribute="drink" method="post">
-            <sf:errors path="*"/>
             <div style="display: flex; justify-content: space-around ">
 
                 <div class="form-group">
@@ -55,7 +54,7 @@
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                    <select multiple name="countryIds" type="text" class="form-control" id="exampleInputEmail3">
+                    <select multiple name="ingredientsIds" type="text" class="form-control" id="exampleInputEmail3">
                         <c:forEach var="ingredient" items="${ingredients}">
                             <option value="${ingredient.id}">${ingredient.ingredientName}</option>
                         </c:forEach>

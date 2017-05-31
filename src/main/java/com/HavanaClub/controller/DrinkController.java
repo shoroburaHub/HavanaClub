@@ -1,23 +1,18 @@
 package com.HavanaClub.controller;
 
 import com.HavanaClub.editors.CountryEditor;
-import com.HavanaClub.editors.IngredientEditor;
 import com.HavanaClub.entity.Country;
 import com.HavanaClub.entity.Drink;
-import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.service.CountryService;
 import com.HavanaClub.service.DrinkService;
 import com.HavanaClub.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class DrinkController {
@@ -37,7 +32,7 @@ public class DrinkController {
     @GetMapping("/drink")
     public String drink(Model model) {
 
-        model.addAttribute("drinks", drinkService.drinksWithIngredients());
+        model.addAttribute("drinks", drinkService.drinkWithIngredients());
         model.addAttribute("countries", countryService.findAll());
         model.addAttribute("ingredients", ingredientService.findAll());
         model.addAttribute("drink", new Drink());
@@ -67,7 +62,7 @@ public class DrinkController {
     public String updateDrink(@PathVariable int id, Model model) {
 
 
-        model.addAttribute("updateDrink", drinkService.drinksWithIngredients(id));
+        model.addAttribute("updateDrink", drinkService.drinkWithIngredients(id));
 
         return "updateDrink";
     }
@@ -83,7 +78,7 @@ public class DrinkController {
 
     @GetMapping("/recipe/{id}")
     public String recipe(Model model, @PathVariable int id){
-        model.addAttribute("drink", drinkService.drinksWithIngredients());
+        model.addAttribute("drink", drinkService.drinkWithIngredients(id));
         return "drinkFull";
     }
 

@@ -30,6 +30,8 @@
                 </li>
                 <li><a href="/country">countries</a>
                 </li>
+                <li><a href="/try">try</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -45,6 +47,15 @@
             <tr>
                 <th>drink name</th>
                 <th>ingredients</th>
+                <th>
+                    <li>
+                        <div class="form-group; col-lg-10">
+                            <label class="sr-only" for="search">Email address</label>
+                            <input type="text" class="form-control" id="search"
+                                   placeholder="search"/>
+                        </div>
+                    </li>
+                </th>
             </tr>
             </thead>
             <tbody>

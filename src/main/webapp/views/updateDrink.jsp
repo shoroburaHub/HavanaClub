@@ -16,7 +16,7 @@
 
     <form:form modelAttribute="updateDrink" method="post">
 
-        <form:input path="name" value="${updateDrink.name}"/>
+        <form:input path="drinkName" value="${updateDrink.name}"/>
 
         <br>
 

@@ -17,9 +17,9 @@ public interface DrinkService {
 
     void update(Drink drink);
 
-    List<Drink> drinksWithIngredients();
+    List<Drink> drinkWithIngredients();
 
-    Drink drinksWithIngredients(int id);
+    Drink drinkWithIngredients(int id);
 
     void updateDrink(int drink_id, int ingredient_id);
 
