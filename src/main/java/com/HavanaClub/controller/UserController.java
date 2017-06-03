@@ -24,6 +24,9 @@ public class UserController {
 
     @PostMapping("/signUp")
     public String signUp(@ModelAttribute User user, Model model) {
+
+        System.out.println("user = " + user);
+
         try {
             userService.save(user);
         } catch (Exception e) {

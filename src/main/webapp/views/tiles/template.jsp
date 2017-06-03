@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="/css/header.css">
     <script src="/js/header.js"></script>
+    <meta charset="UTF-8">
 </head>
 <body>
     <div><tiles:insertAttribute name="header"/></div>

@@ -24,6 +24,8 @@
                 <h3 style="text-align: center;color: red">${passwordException}</h3>
                 <form:input path="password" type="password" class="input" id="user_pass" autocomplete="off"
                             placeholder="Password"/>
+                <form:input path="age" class="input" id="user_pass" autocomplete="off"
+                            placeholder="Age" />
                 <input type="submit" class="button" value="Sign Up">
             </form:form><!--.login-form-->
         </div><!--.signup-tab-content-->
