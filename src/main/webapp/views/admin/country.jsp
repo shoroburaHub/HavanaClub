@@ -7,7 +7,7 @@
 
 
     <div class="panel">
-        <sf:form modelAttribute="country"  method="post">
+        <sf:form modelAttribute="country" method="post">
             <div style="display: flex; justify-content: space-around ">
 
                 <div class="form-group">
