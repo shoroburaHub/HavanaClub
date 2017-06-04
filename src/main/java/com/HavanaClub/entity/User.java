@@ -1,13 +1,14 @@
 package com.HavanaClub.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-public class User {
+public class User implements UserDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,11 +19,16 @@ public class User {
 	private String password;
 	private int age;
 
+	@Enumerated
+	private Role role;
+
 	@OneToMany(mappedBy = "user")
 	private Set<Orders> orders = new HashSet<Orders>();
 
 	@ManyToMany
-	@JoinTable(name = "drink_user", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_drink"))
+	@JoinTable(name = "drink_user",
+			joinColumns = @JoinColumn(name = "id_user"),
+			inverseJoinColumns = @JoinColumn(name = "id_drink"))
 	private List<Drink> drinks = new ArrayList<Drink>();
 
 	public User() {
@@ -91,6 +97,14 @@ public class User {
 		this.age = age;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
 		return "User{" +
@@ -99,5 +113,37 @@ public class User {
 				", password='" + password + '\'' +
 				", age=" + age +
 				'}';
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(role.name()));
+		return authorities;
+	}
+
+	@Override
+	public String getUsername() {
+		return String.valueOf(id);
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 }

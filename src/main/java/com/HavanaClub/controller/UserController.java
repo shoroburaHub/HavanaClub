@@ -46,4 +46,14 @@ public class UserController {
         return "redirect:/";
     }
 
+    @PostMapping("/login")
+    public String login(){
+        return "views-user-index";
+    }
+
+    @PostMapping("/logout")
+    public String logout() {
+        return "redirect:/";
+    }
+
 }

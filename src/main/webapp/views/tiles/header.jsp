@@ -1,3 +1,5 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: admin
@@ -10,15 +12,28 @@
 <header class="header" role="banner">
     <nav>
         <ul>
-            <li class="active"><a href="/">Home</a>
+            <li class="active">
+                <sec:authentication property="name"/>
             </li>
-            <li><a href="/signUp">sign up</a>
+            <li class="active">
+                <a href="/">Home</a>
             </li>
-            <li><a href="/drink">drinks</a>
+            <li>
+                <a href="/signUp">sign up</a>
             </li>
-            <li><a href="/ingredient">ingredients</a>
+            <li>
+                <a href="/drink">drinks</a>
             </li>
-            <li><a href="/country">countries</a>
+            <li>
+                <a href="/ingredient">ingredients</a>
+            </li>
+            <li>
+                <a href="/country">countries</a>
+            </li>
+            <li>
+                <form:form action="/logout" method="post">
+                    <button class="btn btn-default">logout</button>
+                </form:form>
             </li>
         </ul>
     </nav>
@@ -28,5 +43,3 @@
 <br>
 <br>
 <br>
-
-

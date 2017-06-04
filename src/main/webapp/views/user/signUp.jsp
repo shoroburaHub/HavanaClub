@@ -24,21 +24,16 @@
                 <h3 style="text-align: center;color: red">${passwordException}</h3>
                 <form:input path="password" type="password" class="input" id="user_pass" autocomplete="off"
                             placeholder="Password"/>
-                <form:input path="age" class="input" id="user_pass" autocomplete="off"
-                            placeholder="Age" />
                 <input type="submit" class="button" value="Sign Up">
             </form:form><!--.login-form-->
         </div><!--.signup-tab-content-->
 
         <div id="login-tab-content">
-            <form class="login-form" action="" method="post">
-                <input type="text" class="input" id="user_login" autocomplete="off" placeholder="Email or Username">
-                <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
-                <input type="checkbox" class="checkbox" id="remember_me">
-                <label for="remember_me">Remember me</label>
-
+            <form:form class="login-form" action="/login" method="post">
+                <input name="username" type="text" class="input" id="user_login" autocomplete="off" placeholder="Username">
+                <input name="password" type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
                 <input type="submit" class="button" value="Login">
-            </form><!--.login-form-->
+            </form:form><!--.login-form-->
         </div><!--.login-tab-content-->
     </div><!--.tabs-content-->
 </div>
