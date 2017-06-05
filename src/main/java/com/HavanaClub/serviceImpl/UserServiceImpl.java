@@ -19,7 +19,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Service("userDetailsService")
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService{
 
     @Autowired
     private UserDao userDao;
@@ -32,9 +32,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private BCryptPasswordEncoder encoder;
 
     public void save(User user) throws Exception {
+        validator.validate(user);
         user.setRole(Role.ROLE_USER);
         user.setPassword(encoder.encode(user.getPassword()));
-        validator.validate(user);
         userDao.save(user);
     }
 
@@ -64,12 +64,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void like(Principal principal, int drinkId) {
+    public void like(Principal principal, int id) {
 
         User user = userDao.findUserWithDrinks(Integer.parseInt(principal.getName()));
 
-        Drink drink = drinkDao.findOne(drinkId);
-
+        Drink drink = drinkDao.findOne(id);
 
         user.getDrinks().add(drink);
 
@@ -82,3 +81,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userDao.findUserWithDrinks(id);
     }
 }
+

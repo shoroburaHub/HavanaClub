@@ -12,12 +12,17 @@
 <header class="header" role="banner">
     <nav>
         <ul>
-            <li class="active">
+            <li>
                 <sec:authentication property="name"/>
             </li>
             <li class="active">
                 <a href="/">Home</a>
             </li>
+            <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+                <li class="active">
+                    <a href="/profile">profile</a>
+                </li>
+            </sec:authorize>
             <sec:authorize access="!isAuthenticated()">
                 <li>
                     <a href="/signUp">sign up</a>
@@ -32,11 +37,6 @@
                 </li>
                 <li>
                     <a href="/country">countries</a>
-                </li>
-            </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
-                <li>
-                    <a href="/profile">profile</a>
                 </li>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">

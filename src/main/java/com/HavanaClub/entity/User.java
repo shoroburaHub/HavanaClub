@@ -17,7 +17,6 @@ public class User implements UserDetails{
 	private String name;
 	private String email;
 	private String password;
-	private int age;
 
 	@Enumerated
 	private Role role;
@@ -89,30 +88,12 @@ public class User implements UserDetails{
 		this.drinks = drinks;
 	}
 
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
 	public Role getRole() {
 		return role;
 	}
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	@Override
-	public String toString() {
-		return "User{" +
-				"name='" + name + '\'' +
-				", email='" + email + '\'' +
-				", password='" + password + '\'' +
-				", age=" + age +
-				'}';
 	}
 
 	@Override

@@ -32,8 +32,6 @@ public class UserValidator implements Validator {
             throw new UserException(UserValidationMessages.EMAIL_ALREADY_EXIST);
         }else if(user.getPassword().isEmpty()){
             throw new UserException(UserValidationMessages.EMPTY_PASSWORD_FIELD);
-        }else if(user.getPassword().length() < 4){
-            throw new UserException(UserValidationMessages.TOO_SHORT_PASSWORD);
         }
 
     }

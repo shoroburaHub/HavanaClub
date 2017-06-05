@@ -3,6 +3,7 @@ package com.HavanaClub.controller;
 import com.HavanaClub.entity.User;
 import com.HavanaClub.service.UserService;
 import com.HavanaClub.validator.user.UserValidationMessages;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,32 +41,29 @@ public class UserController {
                     e.getMessage().equals(UserValidationMessages.EMAIL_ALREADY_EXIST)||
                     e.getMessage().equals(UserValidationMessages.WRONG_EMAIL)){
                 model.addAttribute("emailException", e.getMessage());
-            }else if(e.getMessage().equals(UserValidationMessages.EMPTY_PASSWORD_FIELD)||
-                    e.getMessage().equals(UserValidationMessages.TOO_SHORT_PASSWORD)){
+            }else if(e.getMessage().equals(UserValidationMessages.EMPTY_PASSWORD_FIELD)){
                 model.addAttribute("passwordException", e.getMessage());
             }
+
+            System.out.println("user = " + user);
             return "views-user-signUp";
         }
         return "redirect:/";
     }
 
-    @PostMapping("/logout")
-    public String logout() {
-        return "redirect:/";
-    }
-
-    @GetMapping("/profile")
-    public String profile(Principal principal,Model model){
-        model.addAttribute("user", userService.findUserWithDrinks(Integer.parseInt(principal.getName())));
-        return "views-user-profile";
-    }
     @GetMapping("/like/{id}")
-    public String like(Principal principal, @PathVariable int id){
+    public String like(@PathVariable int id, Principal principal){
 
         userService.like(principal, id);
 
         return "redirect:/";
     }
 
+    @GetMapping("/profile")
+    public String profile(Principal principal, Model model){
 
+        model.addAttribute("user", userService
+                .findUserWithDrinks(Integer.parseInt(principal.getName())));
+        return "views-user-profile";
+    }
 }
