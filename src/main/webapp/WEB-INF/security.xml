@@ -7,14 +7,11 @@
     <import resource="applicationContext.xml"/>
 
     <security:http>
-        <security:form-login login-page="/signUp" login-processing-url="/login" authentication-success-forward-url="/"/>
-
-        <security:intercept-url pattern="/" access="permitAll()"/>
+        <security:form-login  login-page="/signUp" login-processing-url="/login"
+                             authentication-success-forward-url="/"/>
 
         <security:logout logout-url="/logout" logout-success-url="/"/>
     </security:http>
-
-    <security:global-method-security secured-annotations="enabled"/>
 
     <security:authentication-manager>
         <security:authentication-provider>
@@ -29,4 +26,5 @@
 
     <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
     </bean>
+
 </beans>

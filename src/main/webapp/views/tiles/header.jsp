@@ -18,23 +18,34 @@
             <li class="active">
                 <a href="/">Home</a>
             </li>
-            <li>
-                <a href="/signUp">sign up</a>
-            </li>
-            <li>
-                <a href="/drink">drinks</a>
-            </li>
-            <li>
-                <a href="/ingredient">ingredients</a>
-            </li>
-            <li>
-                <a href="/country">countries</a>
-            </li>
-            <li>
-                <form:form action="/logout" method="post">
-                    <button class="btn btn-default">logout</button>
-                </form:form>
-            </li>
+            <sec:authorize access="!isAuthenticated()">
+                <li>
+                    <a href="/signUp">sign up</a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <li>
+                    <a href="/drink">drinks</a>
+                </li>
+                <li>
+                    <a href="/ingredient">ingredients</a>
+                </li>
+                <li>
+                    <a href="/country">countries</a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <li>
+                    <a href="/profile">profile</a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <li>
+                    <form:form action="/logout" method="post">
+                        <button class="btn btn-default">logout</button>
+                    </form:form>
+                </li>
+            </sec:authorize>
         </ul>
     </nav>
 </header>

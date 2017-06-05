@@ -18,11 +18,11 @@ public class IndexController {
         model.addAttribute("drinks", drinkService.drinkWithIngredients());
         return "views-base-index";
     }
+
     @PostMapping("/")
-    public String indexLogin(Model model) {
+    public String indexAfterLogin(Model model) {
         model.addAttribute("drinks", drinkService.drinkWithIngredients());
         return "views-base-index";
     }
-
 
 }

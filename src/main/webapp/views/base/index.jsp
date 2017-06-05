@@ -47,6 +47,9 @@
                     <td>
                         <a href="recipe/${drink.id}">recipe</a>
                     </td>
+                    <td>
+                        <a href="like/${drink.id}">like</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

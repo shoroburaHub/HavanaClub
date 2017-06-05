@@ -8,7 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -46,14 +49,23 @@ public class UserController {
         return "redirect:/";
     }
 
-    @PostMapping("/login")
-    public String login(){
-        return "views-user-index";
-    }
-
     @PostMapping("/logout")
     public String logout() {
         return "redirect:/";
     }
+
+    @GetMapping("/profile")
+    public String profile(Principal principal,Model model){
+        model.addAttribute("user", userService.findUserWithDrinks(Integer.parseInt(principal.getName())));
+        return "views-user-profile";
+    }
+    @GetMapping("/like/{id}")
+    public String like(Principal principal, @PathVariable int id){
+
+        userService.like(principal, id);
+
+        return "redirect:/";
+    }
+
 
 }

@@ -34,11 +34,11 @@
         <param-value>/WEB-INF/security.xml</param-value>
     </context-param>
 
-    <!-- Listener необхідний для того, щоб була можливість підлючити context-param
-        для Spring Security -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <!-- Listener необхідний для того, щоб була можливість підлючити context-param
+        для Spring Security -->
     <!--spring security-->
 
 

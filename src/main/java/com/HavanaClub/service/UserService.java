@@ -2,6 +2,7 @@ package com.HavanaClub.service;
 
 import com.HavanaClub.entity.User;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface UserService {
@@ -18,5 +19,8 @@ public interface UserService {
 
     User findUserWithOrders(int id);
 
+    void like(Principal principal, int drinkId);
+
+    User findUserWithDrinks(int id);
 
 }
