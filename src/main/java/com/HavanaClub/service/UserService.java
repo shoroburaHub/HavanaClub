@@ -19,7 +19,9 @@ public interface UserService {
 
     User findUserWithOrders(int id);
 
-    void like(Principal principal, int id);
+
 
     User findUserWithDrinks(int id);
+
+    User findByName(String name);
 }

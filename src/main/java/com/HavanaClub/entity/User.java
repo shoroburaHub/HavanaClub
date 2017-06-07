@@ -17,6 +17,7 @@ public class User implements UserDetails{
 	private String name;
 	private String email;
 	private String password;
+	private String token;
 
 	@Enumerated
 	private Role role;
@@ -32,6 +33,11 @@ public class User implements UserDetails{
 
 	public User() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public User(String name, String password) {
+		this.name = name;
+		this.password = password;
 	}
 
 	public User(String name, String email, String password) {
@@ -96,6 +102,14 @@ public class User implements UserDetails{
 		this.role = role;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
@@ -126,5 +140,16 @@ public class User implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", drinks=" + drinks +
+				'}';
 	}
 }

@@ -1,5 +1,6 @@
 package com.HavanaClub.serviceImpl;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,6 +16,7 @@ import com.HavanaClub.entity.Drink;
 import com.HavanaClub.entity.Orders;
 import com.HavanaClub.entity.User;
 import com.HavanaClub.service.OrdersService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
@@ -61,4 +63,56 @@ public class OrdersServiceImpl implements OrdersService {
 		ordersDao.save(orders);
 	}
 
+
+	@Override
+	public void addIntoBasket(Principal principal, int id) {
+
+		User user = userDao.findUserWithDrinks(Integer.parseInt(principal.getName()));
+
+		Drink drink = drinkDao.findOne(id);
+
+		user.getDrinks().add(drink);
+
+		userDao.save(user);
+
+	}
+
+	@Override
+	@Transactional
+	public void deleteFromBasket(int userId, int drinkId) {
+
+		User user = userDao.findUserWithDrinks(userId);
+
+		Drink drink = drinkDao.drinksWithUsers(drinkId);
+
+		user.getDrinks().remove(drink);
+
+		userDao.save(user);
+
+	}
+
+	@Override
+	public void buy(int userId) {
+
+		Orders orders = new Orders(LocalDate.now());
+
+		ordersDao.saveAndFlush(orders);
+
+		User user = userDao.findUserWithDrinks(userId);
+
+		orders.setUser(user);
+
+		for (Drink drink : user.getDrinks()) {
+
+			orders.getDrinks().add(drink);
+
+			ordersDao.save(orders);
+
+		}
+
+		user.getDrinks().clear();
+		userDao.save(user);
+
+
+	}
 }

@@ -48,7 +48,7 @@
                     </td>
                     <sec:authorize access="hasRole('ROLE_USER')">
                         <td>
-                            <a href="like/${drink.id}">like</a>
+                            <a href="/addIntoBasket/${drink.id}">basket</a>
                         </td>
                     </sec:authorize>
                 </tr>

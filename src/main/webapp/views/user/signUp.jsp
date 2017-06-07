@@ -6,6 +6,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/signUp.js"></script>
 
+${exception}
+
 <div class="form-wrap">
     <div class="tabs">
         <h3 class="signup-tab"><a class="active" href="#signup-tab-content">Sign Up</a></h3>
@@ -30,9 +32,16 @@
 
         <div id="login-tab-content">
             <form:form class="login-form" action="/login" method="post">
+                ${nameNotFound}
                 <input name="username" type="text" class="input" id="user_login" autocomplete="off" placeholder="Username">
                 <input name="password" type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
+
+                <label>Remember Me? </label>
+
                 <input type="submit" class="button" value="Login">
+
+                <%--<input type="hidden" name="${_csrf.parameterName}"
+                       value="${_csrf.token}" />--%>
             </form:form><!--.login-form-->
         </div><!--.login-tab-content-->
     </div><!--.tabs-content-->

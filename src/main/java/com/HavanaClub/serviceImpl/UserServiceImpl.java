@@ -3,10 +3,12 @@ package com.HavanaClub.serviceImpl;
 import com.HavanaClub.dao.DrinkDao;
 import com.HavanaClub.dao.UserDao;
 import com.HavanaClub.entity.Drink;
+import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.entity.Role;
 import com.HavanaClub.entity.User;
 import com.HavanaClub.service.UserService;
 import com.HavanaClub.validator.Validator;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 @Service("userDetailsService")
 public class UserServiceImpl implements UserService, UserDetailsService{
@@ -60,25 +63,33 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        return userDao.findByName(name);
-    }
-
-    @Override
-    public void like(Principal principal, int id) {
-
-        User user = userDao.findUserWithDrinks(Integer.parseInt(principal.getName()));
-
-        Drink drink = drinkDao.findOne(id);
-
-        user.getDrinks().add(drink);
-
-        userDao.save(user);
-
+        return userDao.findByNameOrEmail(name);
     }
 
     @Override
     public User findUserWithDrinks(int id) {
-        return userDao.findUserWithDrinks(id);
+        User user = userDao.findUserWithDrinks(id);
+
+        User returnedUser = new User();
+        returnedUser.setId(user.getId());
+        returnedUser.setName(user.getName());
+
+        for (int i = 0; i < user.getDrinks().size(); i++) {
+            returnedUser.getDrinks().add(new Drink(user.getDrinks().get(i).getDrinkName(), user.getDrinks().get(i).getRecipe()));
+        }
+
+        int counter = 0;
+        for (Drink drink : user.getDrinks()) {
+            returnedUser.getDrinks().get(counter).setIngredients(drinkDao.drinksWithIngredients(drink.getId()).getIngredients());
+            counter++;
+        }
+
+        return returnedUser;
+    }
+
+    @Override
+    public User findByName(String name) {
+        return userDao.findByName(name);
     }
 }
 

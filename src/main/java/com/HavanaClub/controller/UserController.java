@@ -2,15 +2,15 @@ package com.HavanaClub.controller;
 
 import com.HavanaClub.entity.User;
 import com.HavanaClub.service.UserService;
+import com.HavanaClub.validator.Validator;
 import com.HavanaClub.validator.user.UserValidationMessages;
+import com.HavanaClub.validator.userLoginValidation.UserLoginValidationMessages;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -19,6 +19,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    @Qualifier("userLoginValidator")
+    private Validator validator;
 
     @GetMapping("/signUp")
     public String signUp(Model model) {
@@ -28,8 +31,6 @@ public class UserController {
 
     @PostMapping("/signUp")
     public String signUp(@ModelAttribute User user, Model model) {
-
-        System.out.println("user = " + user);
 
         try {
             userService.save(user);
@@ -51,19 +52,30 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/like/{id}")
-    public String like(@PathVariable int id, Principal principal){
-
-        userService.like(principal, id);
-
-        return "redirect:/";
-    }
 
     @GetMapping("/profile")
     public String profile(Principal principal, Model model){
 
-        model.addAttribute("user", userService
-                .findUserWithDrinks(Integer.parseInt(principal.getName())));
+        model.addAttribute("userBasket", userService.findUserWithDrinks(Integer.parseInt(principal.getName())));
         return "views-user-profile";
     }
+
+    @PostMapping("/failureLogin")
+    public String failureLogin(Model model, @RequestParam String username,
+                               @RequestParam String password){
+
+        try {
+            validator.validate(new User(username,password));
+        } catch (Exception e) {
+            if(e.getMessage().equals(UserLoginValidationMessages.EMPTY_USERNAME_FIELD)||
+                    e.getMessage().equals(UserLoginValidationMessages.EMPTY_PASSWORD_FIELD)||
+                    e.getMessage().equals(UserLoginValidationMessages.WRONG_USERNAME_OR_PASSWORD)){
+                model.addAttribute("exception", e.getMessage());
+            }
+        }
+        model.addAttribute("user", new User());
+
+        return "views-user-signUp";
+    }
+
 }

@@ -4,7 +4,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Drink {
@@ -33,7 +35,7 @@ public class Drink {
     @JoinTable(name = "drink_ingredient",
             joinColumns = @JoinColumn(name = "id_drink"),
             inverseJoinColumns = @JoinColumn(name = "id_ingredient"))
-    private List<Ingredient> ingredients = new ArrayList<Ingredient>();
+    private List<Ingredient> ingredients = new ArrayList<>();
 
 
     public Drink() {
@@ -43,6 +45,11 @@ public class Drink {
     public Drink(String drinkName) {
         super();
         this.drinkName = drinkName;
+    }
+
+    public Drink(String drinkName, String recipe) {
+        this.drinkName = drinkName;
+        this.recipe = recipe;
     }
 
     public int getId() {
@@ -107,8 +114,6 @@ public class Drink {
                 "id=" + id +
                 ", drinkName='" + drinkName + '\'' +
                 ", recipe='" + recipe + '\'' +
-                ", country=" + country +
-                ", ingredients=" + ingredients +
                 '}';
     }
 }
