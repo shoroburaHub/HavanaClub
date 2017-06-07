@@ -78,4 +78,12 @@ public class UserController {
         return "views-user-signUp";
     }
 
+    @GetMapping("/history")
+    public String history(Principal principal, Model model){
+
+        model.addAttribute("user", userService.findUserWithOrders(Integer.parseInt(principal.getName())));
+
+        return "views-user-history";
+    }
+
 }

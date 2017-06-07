@@ -2,6 +2,7 @@ package com.HavanaClub.serviceImpl;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,25 +28,6 @@ public class OrdersServiceImpl implements OrdersService {
 	private DrinkDao drinkDao;
 	@Autowired
 	private UserDao userDao;
-
-	public void save(int userId, List<Integer> drinksIds) {
-		Orders orders = new Orders(LocalDate.now());
-		ordersDao.saveAndFlush(orders);
-		
-		List<Drink> drinks = new ArrayList<Drink>();
-		
-		for(Integer id : drinksIds){
-			drinks.add(drinkDao.findOne(id));
-		}
-		
-		orders.setDrinks(new HashSet<Drink>(drinks));
-
-		User user = userDao.findOne(userId);
-		
-		orders.setUser(user);
-		
-		ordersDao.save(orders);
-	}
 
 	public List<Orders> findAll() {
 		return ordersDao.findAll();
@@ -92,9 +74,10 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
+	@Transactional
 	public void buy(int userId) {
 
-		Orders orders = new Orders(LocalDate.now());
+		Orders orders = new Orders(LocalDateTime.now());
 
 		ordersDao.saveAndFlush(orders);
 
@@ -112,7 +95,6 @@ public class OrdersServiceImpl implements OrdersService {
 
 		user.getDrinks().clear();
 		userDao.save(user);
-
 
 	}
 }

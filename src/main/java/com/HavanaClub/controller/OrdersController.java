@@ -37,10 +37,10 @@ public class OrdersController {
 		return "redirect:/profile";
 	}
 
-	@PostMapping("/buy/{userId}")
-	public String buy(@PathVariable int userId){
+	@PostMapping("/buy")
+	public String buy(Principal principal){
 
-		ordersService.buy(userId);
+		ordersService.buy(Integer.parseInt(principal.getName()));
 
 		return "redirect:/profile";
 

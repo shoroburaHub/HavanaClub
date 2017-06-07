@@ -9,25 +9,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-${user.name}
-<br>
-<br>
-<br>
-<%--<c:forEach var="drink" items="${userBasket.drinks}">--%>
-    <%--${drink.drinkName}--%>
-    <%--<a href="/deleteFromBasket/${userBasket.id}/${userBasket.id}">delete</a>--%>
-    <%--<br>--%>
-<%--</c:forEach>--%>
-
-<%--<form:form action="/buy/${user.id}" method="post">--%>
-    <%--<button class="btn btn-default">buy</button>--%>
-<%--</form:form>--%>
-
-
-
-
-
-
 <div class="container">
 
     <table class="table table-hover">
@@ -38,7 +19,7 @@ ${user.name}
             <th>drink recipe</th>
             <th>delete from basket</th>
             <th>
-                <form:form action="/buy/${user.id}" method="post">
+                <form:form action="/buy" method="post">
                     <button class="btn btn-default">buy</button>
                 </form:form>
             </th>
@@ -59,7 +40,7 @@ ${user.name}
                         ${drink.recipe}
                 </td>
                 <td>
-                    <a href="/deleteFromBasket/${userBasket.id}/${userBasket.id}">delete</a>
+                    <a href="/deleteFromBasket/${userBasket.id}/${drink.id}">delete</a>
                 </td>
             </tr>
         </c:forEach>

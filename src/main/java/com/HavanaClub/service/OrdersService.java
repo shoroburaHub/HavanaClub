@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface OrdersService {
 
-	void save(int userId, List<Integer> drinksIds);
-
 	List<Orders> findAll();
 
 	Orders findOne(int id);

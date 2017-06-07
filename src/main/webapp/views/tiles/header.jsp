@@ -39,6 +39,11 @@
                     <a href="/country">countries</a>
                 </li>
             </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_USER')">
+                <li>
+                    <a href="/history">history</a>
+                </li>
+            </sec:authorize>
             <sec:authorize access="isAuthenticated()">
                 <li>
                     <form:form action="/logout" method="post">

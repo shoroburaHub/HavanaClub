@@ -2,6 +2,7 @@ package com.HavanaClub.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ public class Orders {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private LocalDate date;
+	private LocalDateTime localDateTime;
 
 	@ManyToOne
 	private User user;
@@ -24,9 +25,9 @@ public class Orders {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(LocalDate date) {
+	public Orders(LocalDateTime localDateTime) {
 		super();
-		this.date = date;
+		this.localDateTime = localDateTime;
 	}
 
 	public int getId() {
@@ -37,12 +38,12 @@ public class Orders {
 		this.id = id;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public LocalDateTime getLocalDateTime() {
+		return localDateTime;
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setLocalDateTime(LocalDateTime localDateTime) {
+		this.localDateTime = localDateTime;
 	}
 
 	public User getUser() {

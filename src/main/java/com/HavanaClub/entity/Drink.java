@@ -47,7 +47,8 @@ public class Drink {
         this.drinkName = drinkName;
     }
 
-    public Drink(String drinkName, String recipe) {
+    public Drink(int id, String drinkName, String recipe) {
+        this.id = id;
         this.drinkName = drinkName;
         this.recipe = recipe;
     }
