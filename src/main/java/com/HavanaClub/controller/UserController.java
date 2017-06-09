@@ -1,11 +1,11 @@
 package com.HavanaClub.controller;
 
 import com.HavanaClub.entity.User;
+import com.HavanaClub.service.MailSenderService;
 import com.HavanaClub.service.UserService;
 import com.HavanaClub.validator.Validator;
 import com.HavanaClub.validator.user.UserValidationMessages;
 import com.HavanaClub.validator.userLoginValidation.UserLoginValidationMessages;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,15 +13,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.UUID;
 
 @Controller
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MailSenderService mailSenderService;
+
     @Autowired
     @Qualifier("userLoginValidator")
     private Validator validator;
+
+
 
     @GetMapping("/signUp")
     public String signUp(Model model) {
@@ -31,6 +38,12 @@ public class UserController {
 
     @PostMapping("/signUp")
     public String signUp(@ModelAttribute User user, Model model) {
+
+
+        String uuid = UUID.randomUUID().toString();
+
+        user.setUuid(uuid);
+
 
         try {
             userService.save(user);
@@ -49,6 +62,13 @@ public class UserController {
             System.out.println("user = " + user);
             return "views-user-signUp";
         }
+
+        String theme = "thank's for registration";
+        String mailBody =
+                "gl & hf       http://localhost:8080/confirm/" + uuid;
+
+        mailSenderService.sendMail(theme, mailBody, user.getEmail());
+
         return "redirect:/";
     }
 
@@ -84,6 +104,16 @@ public class UserController {
         model.addAttribute("user", userService.findUserWithOrders(Integer.parseInt(principal.getName())));
 
         return "views-user-history";
+    }
+    @GetMapping("/confirm/{uuid}")
+    public String confirm(@PathVariable String uuid) {
+
+        User user = userService.findByUuid(uuid);
+        user.setEnable(true);
+
+        userService.update(user);
+
+        return "redirect:/";
     }
 
 }

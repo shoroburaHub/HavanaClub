@@ -19,9 +19,9 @@ public interface UserService {
 
     User findUserWithOrders(int id);
 
-
-
     User findUserWithDrinks(int id);
 
     User findByName(String name);
+
+    User findByUuid(String uuid);
 }

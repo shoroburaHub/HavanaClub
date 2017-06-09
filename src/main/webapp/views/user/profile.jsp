@@ -14,15 +14,22 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>drink name</th>
-            <th>ingredients</th>
-            <th>drink recipe</th>
-            <th>delete from basket</th>
-            <th>
-                <form:form action="/buy" method="post">
-                    <button class="btn btn-default">buy</button>
-                </form:form>
-            </th>
+            <c:if test="${userBasket.drinks.size() != 0}">
+                <th>drink name</th>
+                <th>ingredients</th>
+                <th>drink recipe</th>
+                <th>delete from basket</th>
+                <th>
+                    <form:form action="/buy" method="post">
+                        <button class="btn btn-default">buy</button>
+                    </form:form>
+                </th>
+            </c:if>
+            <c:if test="${userBasket.drinks.size() == 0}">
+                <th>
+                    don't have any drinks in basket
+                </th>
+            </c:if>
         </tr>
         </thead>
         <tbody>

@@ -17,7 +17,9 @@ public class User implements UserDetails{
 	private String name;
 	private String email;
 	private String password;
-	private String token;
+
+	private boolean enable;
+	private String uuid;
 
 	@Enumerated
 	private Role role;
@@ -102,12 +104,20 @@ public class User implements UserDetails{
 		this.role = role;
 	}
 
-	public String getToken() {
-		return token;
+	public boolean isEnable() {
+		return enable;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 	@Override
@@ -139,7 +149,7 @@ public class User implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return enable;
 	}
 
 	@Override

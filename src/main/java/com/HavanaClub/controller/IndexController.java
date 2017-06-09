@@ -29,7 +29,7 @@ public class IndexController {
     @GetMapping("/recipe/{id}")
     public String recipe(Model model, @PathVariable int id){
 
-        model.addAttribute("drink", drinkService.drinkWithAllInfo(id));
+        model.addAttribute("drink", drinkService.drinkWithIngredients(id));
 
         return "views-base-drinkWithRecipe";
 

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "drink", indexes = @Index(columnList = "drinkName",  name = "drinkName_index"))
 public class Drink {
 
     @Id
