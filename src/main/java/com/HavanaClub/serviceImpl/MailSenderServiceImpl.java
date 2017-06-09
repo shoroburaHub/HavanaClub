@@ -4,10 +4,8 @@ import com.HavanaClub.service.MailSenderService;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.xml.soap.SAAJResult;
 import java.util.Properties;
 
 /**
@@ -16,8 +14,8 @@ import java.util.Properties;
 @Service
 public class MailSenderServiceImpl implements MailSenderService{
 
-    private final String EMAIL_FROM = "alexbond761@gmail.com";
-    private final String EMAIL_PASSWORD = "fuckoff16121990";
+    private final String EMAIL_FROM = "koko1990rokoko@gmail.com";
+    private final String EMAIL_PASSWORD = "kokokokokoko";
 
     @Override
     public void sendMail(String theme, String mailBody, String email) {
@@ -51,7 +49,6 @@ public class MailSenderServiceImpl implements MailSenderService{
             mex.printStackTrace();
             System.out.println("You have some problems with connection!");
         }
-
 
     }
 }

@@ -36,8 +36,6 @@
                 <input name="password" type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
 
                 <input type="submit" class="button" value="Login">
-
-
             </form:form>
         </div
     </div>

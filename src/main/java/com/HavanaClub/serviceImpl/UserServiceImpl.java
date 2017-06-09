@@ -75,12 +75,17 @@ public class UserServiceImpl implements UserService, UserDetailsService{
         returnedUser.setName(user.getName());
 
         for (int i = 0; i < user.getDrinks().size(); i++) {
-            returnedUser.getDrinks().add(new Drink(user.getDrinks().get(i).getId(), user.getDrinks().get(i).getDrinkName(), user.getDrinks().get(i).getRecipe()));
+            returnedUser.getDrinks().add(new Drink(user.getDrinks().get(i).getId(),
+                    user.getDrinks().get(i).getDrinkName(),
+                    user.getDrinks().get(i).getRecipe()));
         }
 
         int counter = 0;
         for (Drink drink : user.getDrinks()) {
-            returnedUser.getDrinks().get(counter).setIngredients(drinkDao.drinksWithIngredients(drink.getId()).getIngredients());
+            returnedUser.getDrinks().get(counter)
+                    .setIngredients(drinkDao
+                            .drinksWithIngredients(drink.getId())
+                            .getIngredients());
             counter++;
         }
 

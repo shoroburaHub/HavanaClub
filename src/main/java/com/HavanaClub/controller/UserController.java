@@ -37,13 +37,12 @@ public class UserController {
     }
 
     @PostMapping("/signUp")
-    public String signUp(@ModelAttribute User user, Model model) {
+    public String signUp(@ModelAttribute("user") User user, Model model) {
 
 
-        String uuid = UUID.randomUUID().toString();
+        String uuid = UUID.randomUUID().toString();//asdjcniq3nv3oriv9q3j0eic9wuEQDCQW
 
         user.setUuid(uuid);
-
 
         try {
             userService.save(user);
@@ -59,7 +58,6 @@ public class UserController {
                 model.addAttribute("passwordException", e.getMessage());
             }
 
-            System.out.println("user = " + user);
             return "views-user-signUp";
         }
 
@@ -105,6 +103,8 @@ public class UserController {
 
         return "views-user-history";
     }
+
+
     @GetMapping("/confirm/{uuid}")
     public String confirm(@PathVariable String uuid) {
 
