@@ -17,6 +17,11 @@
     </security:http>
 
     <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="admin" password="admin" authorities="ROLE_ADMIN"/>
+            </security:user-service>
+        </security:authentication-provider>
         <security:authentication-provider user-service-ref="userDetailsService">
             <security:password-encoder ref="encoder"/>
         </security:authentication-provider>

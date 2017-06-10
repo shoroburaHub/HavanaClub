@@ -118,4 +118,19 @@ public class Drink {
                 ", recipe='" + recipe + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Drink drink = (Drink) o;
+
+        return id == drink.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

@@ -101,5 +101,10 @@ public class UserServiceImpl implements UserService, UserDetailsService{
     public User findByUuid(String uuid) {
         return userDao.findByUuid(uuid);
     }
+
+    @Override
+    public User findUserByNameWithDrinks(String name) {
+        return userDao.findUserByNameWithDrinks(name);
+    }
 }
 

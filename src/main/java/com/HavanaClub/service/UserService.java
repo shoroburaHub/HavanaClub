@@ -24,4 +24,6 @@ public interface UserService {
     User findByName(String name);
 
     User findByUuid(String uuid);
+
+    User findUserByNameWithDrinks(String name);
 }

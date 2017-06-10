@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div>
 
@@ -40,7 +41,16 @@
                     </td>
                     <sec:authorize access="hasRole('ROLE_USER')">
                         <td>
-                            <a href="/addIntoBasket/${drink.id}">basket</a>
+                        <c:choose>
+                            <c:when test="${user.drinks.contains(drink)}">
+                                <td>drink already in basket</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>
+                                    <a href="/addIntoBasket/${drink.id}">basket</a>
+                                </td>
+                            </c:otherwise>
+                        </c:choose>
                         </td>
                     </sec:authorize>
                 </tr>
@@ -49,3 +59,6 @@
         </table>
     </div>
 </div>
+
+${user.drinks}
+
