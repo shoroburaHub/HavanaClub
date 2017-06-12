@@ -5,10 +5,8 @@ import com.HavanaClub.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class CountryController {
@@ -24,11 +22,11 @@ public class CountryController {
     }
 
     @PostMapping("/country")
-    public String country(@ModelAttribute Country country, Model model) {
+    public String country(@ModelAttribute Country country,
+                          Model model,
+                          @RequestParam MultipartFile image) {
 
-
-
-        countryService.save(country);
+        countryService.save(country, image);
 
 
         return "redirect:/country";
@@ -42,4 +40,26 @@ public class CountryController {
         return "redirect:/country";
     }
 
+    @GetMapping("/updateCountry/{countryId}")
+    public String updateCountry(@PathVariable int countryId, Model model){
+
+        model.addAttribute("country", countryService.findOne(countryId));
+
+        return "views-admin-updateCountry";
+
+    }
+
+    @PostMapping("/updateCountry/{countryId}")
+    public String updateCountry(@PathVariable int countryId,
+                                @RequestParam String name,
+                                @RequestParam MultipartFile image){
+
+        Country country = new Country(name);
+        country.setId(countryId);
+
+        countryService.update(country, image);
+
+        return "redirect:/country";
+
+    }
 }

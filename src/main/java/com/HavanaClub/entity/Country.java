@@ -13,6 +13,8 @@ public class Country {
 
 	private String name;
 
+	private String pathImage;
+
 	@OneToMany(mappedBy = "country")
 	private List<Drink> drinks = new ArrayList<Drink>();
 
@@ -47,7 +49,12 @@ public class Country {
 	public void setDrinks(List<Drink> drinks) {
 		this.drinks = drinks;
 	}
-	
-	
 
+	public String getPathImage() {
+		return pathImage;
+	}
+
+	public void setPathImage(String pathImage) {
+		this.pathImage = pathImage;
+	}
 }

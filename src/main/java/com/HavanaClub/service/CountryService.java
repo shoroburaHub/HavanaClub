@@ -3,11 +3,12 @@ package com.HavanaClub.service;
 import java.util.List;
 
 import com.HavanaClub.entity.Country;
+import org.springframework.web.multipart.MultipartFile;
 
 
 public interface CountryService {
 
-	void save(Country country);
+	void save(Country country, MultipartFile image);
 
 	List<Country> findAll();
 
@@ -15,6 +16,6 @@ public interface CountryService {
 
 	void delete(int id);
 
-	void update(Country country);
+	void update(Country country, MultipartFile image);
 	
 }

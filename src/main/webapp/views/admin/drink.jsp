@@ -22,8 +22,8 @@
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail3">Email address</label>
                     <select multiple name="ingredientsIds" type="text" class="form-control" id="exampleInputEmail3">
-                        <c:forEach var="ingredient" items="${ingredients}">
-                            <option value="${ingredient.id}">${ingredient.ingredientName}</option>
+                        <c:forEach var="country" items="${ingredients}">
+                            <option value="${country.id}">${country.ingredientName}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -53,8 +53,8 @@
                             ${drink.recipe}
                     </td>
                     <td>
-                        <c:forEach items="${drink.ingredients}" var="ingredient">
-                            ${ingredient.ingredientName} <br>
+                        <c:forEach items="${drink.ingredients}" var="country">
+                            ${country.ingredientName} <br>
                         </c:forEach>
                     </td>
 
