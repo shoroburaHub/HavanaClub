@@ -2,23 +2,12 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="custom" uri="/WEB-INF/custom.tld" %>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-
 
 <div class="container">
 
     <div class="panel">
-        <sf:form modelAttribute="ingredient" method="post">
+        <form:form modelAttribute="ingredient" method="post">
             <div style="display: flex; justify-content: space-around ">
 
                 <div class="form-group">
@@ -26,12 +15,11 @@
                     <sf:input path="ingredientName" type="text" class="form-control" id="exampleInputEmail3"
                               placeholder="ingredient name"/>
                 </div>
-
                 <div class="form-group">
                     <button class="btn btn-default">save ingredient</button>
                 </div>
             </div>
-        </sf:form>
+        </form:form>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -73,7 +61,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-8 col-xs-12 text-center">
+            <div class="col-md-10 col-xs-12 text-center">
                 <custom:pageable page="${ingredients}" cell="<li></li>" container="<ul class='pagination'></ul>"/>
             </div>
             <div class="col-md-2 col-xs-6">

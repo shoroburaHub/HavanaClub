@@ -10,15 +10,19 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/bootstrap/bootstrap-theme.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <script src="/js/header.js"></script>
+    <%--<script src="/js/header.js"></script>--%>
     <meta charset="UTF-8">
 </head>
 <body>
-    <div><tiles:insertAttribute name="header"/></div>
-    <div><tiles:insertAttribute name="body"/></div>
-    <div><tiles:insertAttribute name="footer"/></div>
+<div><tiles:insertAttribute name="header"/></div>
+<div><tiles:insertAttribute name="body"/></div>
+<div><tiles:insertAttribute name="footer"/></div>
 </body>
 </html>

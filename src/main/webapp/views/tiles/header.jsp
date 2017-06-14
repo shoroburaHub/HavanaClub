@@ -9,6 +9,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<link rel="stylesheet" href="/css/header.css">
+
 <header class="header" role="banner">
     <nav>
         <ul>
