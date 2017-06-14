@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by admin on 5/27/2017.
@@ -22,7 +21,6 @@ public class Parser {
         EntityManager manager = factory.createEntityManager();
 
 
-
         Document document = Jsoup.connect("http://art-zakaz.com.ua/stati/podgotovka-k-prazdniku/47-top-50-koktejlej-mira.html").get();
 
         manager.getTransaction().begin();
@@ -31,11 +29,11 @@ public class Parser {
 
             for (Ingredient ingredient : drink.getIngredients()) {
 
-                if(ingredient.getIngredientName().contains("Д")){
+                if (ingredient.getIngredientName().contains("Д")) {
                     ingredient.setIngredientName(ingredient.getIngredientName().substring(0, ingredient.getIngredientName().indexOf("Д")));
 
                     manager.persist(ingredient);
-                }else{
+                } else {
                     manager.persist(ingredient);
                 }
 
@@ -49,9 +47,6 @@ public class Parser {
 
 
     }
-
-
-
 
 
 }

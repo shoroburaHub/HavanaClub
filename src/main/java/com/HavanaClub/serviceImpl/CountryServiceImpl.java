@@ -24,12 +24,11 @@ public class CountryServiceImpl implements CountryService{
 
 	public void save(Country country, MultipartFile image){
 
-		countryDao.saveAndFlush(country);
-
 		String path = System.getProperty("catalina.home") + "/resources/"
 				+ country.getName() + "/" + image.getOriginalFilename();
 
-		country.setPathImage("resources/" + country.getName() + "/" + image.getOriginalFilename());
+		country.setPathImage("resources/" + country.getName() + "/"
+				+ image.getOriginalFilename());
 
 		File filePath = new File(path);
 
@@ -92,8 +91,4 @@ public class CountryServiceImpl implements CountryService{
 		countryDao.save(country);
 	}
 
-	
-	
-	
-	
 }

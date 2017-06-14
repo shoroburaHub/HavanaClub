@@ -7,7 +7,11 @@ import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.service.DrinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +24,23 @@ public class DrinkServiceImpl implements DrinkService {
     private IngredientDao ingredientDao;
 
 
-    public void save(Drink drink, ArrayList<Integer> ids) {
+    public void save(Drink drink, ArrayList<Integer> ids, MultipartFile image) {
 
         drinkDao.saveAndFlush(drink);
+
+        String path = System.getProperty("catalina.home") + "/resources/"
+                + drink.getDrinkName() + "/" + image.getOriginalFilename();
+
+        drink.setPathImage("resources/" + drink.getDrinkName() + "/" + image.getOriginalFilename());
+
+        File filePath = new File(path);
+
+        try {
+            filePath.mkdirs();
+            image.transferTo(filePath);
+        } catch (IOException e) {
+            System.out.println("error with file");
+        }
 
         for (Integer id : ids) {
             Ingredient ingredient = ingredientDao.ingredientWirthDrinks(id);
@@ -45,13 +63,9 @@ public class DrinkServiceImpl implements DrinkService {
         drinkDao.delete(id);
     }
 
-    public void update(Drink drink) {
-        drinkDao.save(drink);
-    }
-
     public List<Drink> drinkWithIngredients() {
 
-        List<Drink> drinks =drinkDao.drinksWithIngredients();
+        List<Drink> drinks = drinkDao.drinksWithIngredients();
 
         for (Drink drink : drinks) {
 
@@ -64,7 +78,7 @@ public class DrinkServiceImpl implements DrinkService {
             recipe = "";
 
             for (int i = 1; i < line.length; i++) {
-                recipe += i +". " + line[i].trim()+"<br>";
+                recipe += i + ". " + line[i].trim() + "<br>";
             }
 
             drink.setRecipe(recipe);
@@ -87,28 +101,13 @@ public class DrinkServiceImpl implements DrinkService {
         recipe = "";
 
         for (int i = 1; i < line.length; i++) {
-            recipe += i +". " + line[i].trim()+"<br>";
+            recipe += i + ". " + line[i].trim() + "<br>";
         }
 
         drink.setRecipe(recipe);
 
         return drink;
     }
-
-    @Override
-    public void updateDrink(int drink_id, int ingredient_id) {
-
-        Drink drink = drinkDao.drinksWithIngredients(drink_id);
-
-        for (Ingredient ingredient : drink.getIngredients()) {
-
-            if (ingredient.getId() == ingredient_id) {
-                ingredient.setDrinks(null);
-            }
-            ingredientDao.save(ingredient);
-        }
-    }
-
 
     @Override
     public Drink drinkWithAllInfo(int id) {
@@ -122,5 +121,27 @@ public class DrinkServiceImpl implements DrinkService {
         returnedDrink.setUsers(drink1.getUsers());
 
         return returnedDrink;
+    }
+
+    @Transactional
+    @Override
+    public void updateDrink(Drink drink, MultipartFile image, ArrayList<Integer> ingredients) {
+
+        String path = System.getProperty("catalina.home") + "/resources/"
+                + drink.getDrinkName() + "/" + image.getOriginalFilename();
+
+        drink.setPathImage("resources/" + drink.getDrinkName() + "/" + image.getOriginalFilename());
+
+        File filePath = new File(path);
+
+        try {
+            filePath.mkdirs();
+            image.transferTo(filePath);
+        } catch (IOException e) {
+            System.out.println("error with file");
+        }
+
+        drinkDao.save(drink);
+
     }
 }

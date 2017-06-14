@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 
@@ -42,9 +43,10 @@ public class DrinkController {
 
     @PostMapping("/drink")
     public String drink(@ModelAttribute Drink drink,
-                        @RequestParam ArrayList<Integer> ingredientsIds) {
+                        @RequestParam ArrayList<Integer> ingredientsIds,
+                        @RequestParam MultipartFile image) {
 
-            drinkService.save(drink, ingredientsIds);
+            drinkService.save(drink, ingredientsIds, image);
 
             return "redirect:/drink";
     }
@@ -58,11 +60,32 @@ public class DrinkController {
 
     }
 
-    @GetMapping("/updateDrink/{drink_id}/{ingredient_id}")
-    public String updateDrink(@PathVariable int drink_id,
-                              @PathVariable int ingredient_id) {
+    @GetMapping("/updateDrink/{drink_id}")
+    public String updateDrink(Model model,
+                              @PathVariable int drink_id) {
 
-        drinkService.updateDrink(drink_id, ingredient_id);
+        model.addAttribute("drink", drinkService.drinkWithIngredients(drink_id));
+
+
+
+        return "views-admin-updateDrink";
+    }
+
+    /*update does't work for remove/add ingredient into/from drink*/
+    @PostMapping("/updateDrink/{id}")
+    public String updateDrink(@PathVariable int id,
+                              @RequestParam String drinkName,
+                              @RequestParam String recipe,
+                              @RequestParam MultipartFile image,
+                              @RequestParam ArrayList<Integer> ingredients){
+
+
+        System.out.println("ingredients = " + ingredients);
+        Drink drink = drinkService.drinkWithIngredients(id);
+        drink.setDrinkName(drinkName);
+        drink.setRecipe(recipe);
+
+        drinkService.updateDrink(drink,image,ingredients);
 
         return "redirect:/drink";
     }

@@ -6,13 +6,13 @@
 
 <div>
 
-
     <div class="container">
 
         <table class="table table-hover">
             <thead>
             <tr>
                 <th>drink name</th>
+                <th>image</th>
                 <th>ingredients</th>
                 <th>
                     <li>
@@ -30,6 +30,9 @@
                 <tr>
                     <td>
                             ${drink.drinkName}
+                    </td>
+                    <td>
+                        <img src="${drink.pathImage}" alt="${drink.drinkName}" height="192px" width="150px">
                     </td>
                     <td>
                         <c:forEach items="${drink.ingredients}" var="country">

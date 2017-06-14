@@ -24,7 +24,7 @@ public class CountryController {
     @PostMapping("/country")
     public String country(@ModelAttribute Country country,
                           Model model,
-                          @RequestParam MultipartFile image) {
+                          @RequestParam("image") MultipartFile image) {
 
         countryService.save(country, image);
 

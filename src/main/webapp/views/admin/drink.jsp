@@ -6,21 +6,20 @@
 <div class="container">
 
     <div class="panel">
-        <sf:form modelAttribute="drink" method="post">
+        <sf:form modelAttribute="drink" action="/drink?${_csrf.parameterName}=${_csrf.token}"
+                 method="post" enctype="multipart/form-data">
             <div style="display: flex; justify-content: space-around ">
 
                 <div class="form-group">
-                    <label class="sr-only" for="exampleInputEmail3">Email address</label>
                     <sf:input path="drinkName" type="text" class="form-control" id="exampleInputEmail3"
                               placeholder="drink name"/>
+                    <input type="file" name="image" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label class="sr-only" for="exampleInputEmail3">Email address</label>
                     <sf:textarea path="recipe" type="text" class="form-control" id="exampleInputEmail3"
                               placeholder="recipe"/>
                 </div>
                 <div class="form-group">
-                    <label class="sr-only" for="exampleInputEmail3">Email address</label>
                     <select multiple name="ingredientsIds" type="text" class="form-control" id="exampleInputEmail3">
                         <c:forEach var="country" items="${ingredients}">
                             <option value="${country.id}">${country.ingredientName}</option>
@@ -61,13 +60,12 @@
                     <td>
                         <a href="deleteDrink/${drink.id}">delete</a>
                     </td>
+                    <td>
+                        <a href="updateDrink/${drink.id}">update</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
-
-
-</body>
-</html>

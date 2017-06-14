@@ -30,7 +30,8 @@ public class Ingredient {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ingredient(String ingredientName) {
+	public Ingredient(int id, String ingredientName) {
+		this.id = id;
 		this.ingredientName = ingredientName;
 	}
 
@@ -68,5 +69,20 @@ public class Ingredient {
 				"id=" + id +
 				", ingredientName='" + ingredientName + '\'' +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Ingredient that = (Ingredient) o;
+
+		return id == that.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return id;
 	}
 }

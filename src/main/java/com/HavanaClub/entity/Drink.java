@@ -18,6 +18,8 @@ public class Drink {
 
     private String drinkName;
 
+    private String pathImage;
+
     @Type(type="text")
     private String recipe;
 
@@ -108,6 +110,14 @@ public class Drink {
 
     public void setRecipe(String recipe) {
         this.recipe = recipe;
+    }
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
     }
 
     @Override

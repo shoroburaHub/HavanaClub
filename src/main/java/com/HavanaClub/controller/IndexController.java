@@ -23,7 +23,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, Principal principal) {
         model.addAttribute("drinks", drinkService.drinkWithIngredients());
-        if(principal == null){
+        if(principal == null || principal.getName().equals("admin")){
             return "views-base-index";
         }else{
             model.addAttribute("user",
@@ -55,5 +55,4 @@ public class IndexController {
         return "views-base-drinkWithRecipe";
 
     }
-
 }

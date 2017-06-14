@@ -18,7 +18,7 @@
             <li class="active">
                 <a href="/">Home</a>
             </li>
-            <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+            <sec:authorize access="hasAnyRole('ROLE_USER')">
                 <li class="active">
                     <a href="/profile">profile</a>
                 </li>

@@ -7,7 +7,9 @@
 
 
     <div class="panel">
-        <form:form modelAttribute="country" action="/country?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+        <form:form modelAttribute="country"
+                   action="/country?${_csrf.parameterName}=${_csrf.token}"
+                   method="post" enctype="multipart/form-data">
             <div style="display: flex; justify-content: space-around ">
 
                 <div class="form-group">

@@ -1,13 +1,14 @@
 package com.HavanaClub.service;
 
 import com.HavanaClub.entity.Drink;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public interface DrinkService {
 
-    void save(Drink drink, ArrayList<Integer> ids);
+    void save(Drink drink, ArrayList<Integer> ids, MultipartFile image);
 
     List<Drink> findAll();
 
@@ -15,14 +16,11 @@ public interface DrinkService {
 
     void delete(int id);
 
-    void update(Drink drink);
-
     List<Drink> drinkWithIngredients();
 
     Drink drinkWithIngredients(int id);
 
-    void updateDrink(int drink_id, int ingredient_id);
-
     Drink drinkWithAllInfo(int id);
 
+    void updateDrink(Drink drink, MultipartFile image, ArrayList<Integer> ingredients);
 }
