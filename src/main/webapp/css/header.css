@@ -27,7 +27,7 @@ ul {
     text-align: center;
 }
 
-li {
+header > nav > ul > li {
     height: 20px;
     margin-right: 0px;
     border-right: 1px solid #1976D2;

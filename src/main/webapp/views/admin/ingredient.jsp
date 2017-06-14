@@ -12,7 +12,7 @@
 
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                    <sf:input path="ingredientName" type="text" class="form-control" id="exampleInputEmail3"
+                    <form:input path="ingredientName" type="text" class="form-control" id="exampleInputEmail3"
                               placeholder="ingredient name"/>
                 </div>
                 <div class="form-group">
@@ -46,7 +46,8 @@
 
 <%--<a href="/ingredient?page=${ingredients.number}&size=${ingredients.size}">previous</a>--%>
 <%--<a href="/ingredient?page=${ingredients.number+ 2}&size=${ingredients.size}">next</a>--%>
-<div style="display: flex; justify-content: center;text-align: center">
+
+<div style="display: flex; justify-content: center; text-align: center">
 
     <div class="col-md-12 col-xs-12">
         <div class="row">
@@ -61,7 +62,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-10 col-xs-12 text-center">
+            <div class="col-md-4 col-xs-12 text-center">
                 <custom:pageable page="${ingredients}" cell="<li></li>" container="<ul class='pagination'></ul>"/>
             </div>
             <div class="col-md-2 col-xs-6">
