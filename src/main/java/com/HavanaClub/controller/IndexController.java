@@ -63,17 +63,4 @@ public class IndexController {
     }
 
 
-    @GetMapping("/show")
-    public String show(Model model,
-                       @PageableDefault Pageable pageable){
-
-        model.addAttribute("ingredients", ingredientService.findAll(pageable));
-
-        return "views-admin-show";
-
-    }
-
-
-
-
 }

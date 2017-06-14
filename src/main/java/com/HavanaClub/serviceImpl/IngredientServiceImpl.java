@@ -38,7 +38,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public Page<Ingredient> findAll(Pageable pageable) {
+    public Page<Ingredient> findAllPages(Pageable pageable) {
         return ingredientDao.findAll(pageable);
     }
 }

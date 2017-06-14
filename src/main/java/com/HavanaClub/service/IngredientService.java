@@ -14,7 +14,6 @@ public interface IngredientService{
 	void save(Ingredient ingredient);
 
 	List<Ingredient> findAll();
-	Page<Ingredient> findAll(Pageable pageable);
 
 	Ingredient findOne(int id);
 
@@ -22,6 +21,6 @@ public interface IngredientService{
 
 	void update(Ingredient ingredient);
 
-
+	Page<Ingredient> findAllPages(Pageable pageable);
 	
 }
