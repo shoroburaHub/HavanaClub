@@ -6,6 +6,8 @@ import com.HavanaClub.entity.Drink;
 import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.service.DrinkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,7 +45,7 @@ public class DrinkServiceImpl implements DrinkService {
         }
 
         for (Integer id : ids) {
-            Ingredient ingredient = ingredientDao.ingredientWirthDrinks(id);
+            Ingredient ingredient = ingredientDao.ingredientWithDrinks(id);
             ingredient.getDrinks().add(drink);
             ingredientDao.save(ingredient);
         }
@@ -51,8 +53,13 @@ public class DrinkServiceImpl implements DrinkService {
         drinkDao.save(drink);
     }
 
-    public List<Drink> findAll() {
+    @Override
+    public List<Drink> findAll(Pageable pageable) {
         return drinkDao.findAll();
+    }
+
+    public Page<Drink> drinksWithIngredientsPages(Pageable pageable) {
+        return drinkDao.drinksWithIngredientsPages(pageable);
     }
 
     public Drink findOne(int id) {

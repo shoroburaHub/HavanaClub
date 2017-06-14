@@ -1,8 +1,11 @@
 package com.HavanaClub.controller;
 
 import com.HavanaClub.service.DrinkService;
+import com.HavanaClub.service.IngredientService;
 import com.HavanaClub.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +21,13 @@ public class IndexController {
     private DrinkService drinkService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private IngredientService ingredientService;
 
 
     @GetMapping("/")
-    public String index(Model model, Principal principal) {
-        model.addAttribute("drinks", drinkService.drinkWithIngredients());
+    public String index(Model model, Principal principal, @PageableDefault Pageable pageable) {
+        model.addAttribute("drinks", drinkService.drinksWithIngredientsPages(pageable));
         if(principal == null || principal.getName().equals("admin")){
             return "views-base-index";
         }else{
@@ -34,8 +39,9 @@ public class IndexController {
 
     @PostMapping("/")
     public String indexAfterLogin(Model model,
-                                  @RequestParam String username) {
-        model.addAttribute("drinks", drinkService.drinkWithIngredients());
+                                  @RequestParam String username,
+                                  @PageableDefault Pageable pageable) {
+        model.addAttribute("drinks", drinkService.drinksWithIngredientsPages(pageable));
 
         if(username.equals("admin")){
             return "views-base-index";
@@ -55,4 +61,19 @@ public class IndexController {
         return "views-base-drinkWithRecipe";
 
     }
+
+
+    @GetMapping("/show")
+    public String show(Model model,
+                       @PageableDefault Pageable pageable){
+
+        model.addAttribute("ingredients", ingredientService.findAll(pageable));
+
+        return "views-admin-show";
+
+    }
+
+
+
+
 }

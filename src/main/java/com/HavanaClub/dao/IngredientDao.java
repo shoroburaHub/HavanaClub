@@ -8,7 +8,9 @@ import org.springframework.data.repository.query.Param;
 public interface IngredientDao extends JpaRepository<Ingredient, Integer> {
 
     @Query("select i from Ingredient i left join fetch i.drinks where i.id=:id")
-    Ingredient ingredientWirthDrinks(@Param("id") int id);
+    Ingredient ingredientWithDrinks(@Param("id") int id);
+
+
 
 
 }

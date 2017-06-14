@@ -4,6 +4,8 @@ import com.HavanaClub.dao.IngredientDao;
 import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +37,8 @@ public class IngredientServiceImpl implements IngredientService {
         ingredientDao.save(ingredient);
     }
 
-
-
-
+    @Override
+    public Page<Ingredient> findAll(Pageable pageable) {
+        return ingredientDao.findAll(pageable);
+    }
 }

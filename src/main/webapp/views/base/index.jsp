@@ -26,7 +26,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="drink" items="${drinks}">
+            <c:forEach var="drink" items="${drinks.content}">
                 <tr>
                     <td>
                             ${drink.drinkName}
@@ -35,8 +35,8 @@
                         <img src="${drink.pathImage}" alt="${drink.drinkName}" height="192px" width="150px">
                     </td>
                     <td>
-                        <c:forEach items="${drink.ingredients}" var="country">
-                            ${country.ingredientName} <br>
+                        <c:forEach items="${drink.ingredients}" var="ingredient">
+                            ${ingredient.ingredientName} <br>
                         </c:forEach>
                     </td>
                     <td>
@@ -63,5 +63,6 @@
     </div>
 </div>
 
-${user.drinks}
+<a href="/?page=${drinks.number}&size=${drinks.size}">previous</a>
+<a href="/?page=${drinks.number+ 2}&size=${drinks.size}">next</a>
 
