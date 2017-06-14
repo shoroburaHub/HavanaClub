@@ -21,6 +21,7 @@ public class SizeTag extends SimpleTagSupport {
     private int size;
     private int[] posibleSizes;
 
+
     @Override
     public void doTag() throws JspException, IOException {
         JspWriter out = getJspContext().getOut();
