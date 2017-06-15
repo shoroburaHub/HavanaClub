@@ -99,11 +99,7 @@ public class DrinkServiceImpl implements DrinkService {
     @Override
     public Drink drinkWithIngredientsParsed(int id) {
 
-        System.out.println("id = " + id);
-
         Drink drink = drinkDao.drinkWithIngredients(id);
-
-        System.out.println("drink = " + drink);
 
         String recipe = drink.getRecipe();
 
