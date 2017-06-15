@@ -40,7 +40,7 @@ public class UserController {
     public String signUp(@ModelAttribute("user") User user, Model model) {
 
 
-        String uuid = UUID.randomUUID().toString();//asdjcniq3nv3oriv9q3j0eic9wuEQDCQW
+        String uuid = UUID.randomUUID().toString();
 
         user.setUuid(uuid);
 
