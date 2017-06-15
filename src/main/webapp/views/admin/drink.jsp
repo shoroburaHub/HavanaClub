@@ -36,6 +36,7 @@
             <thead>
             <tr>
                 <th>name</th>
+                <th>image</th>
                 <th>recipe</th>
                 <th>ingredients</th>
                 <th>delete</th>
@@ -47,6 +48,9 @@
                 <tr>
                     <td>
                             ${drink.drinkName}
+                    </td>
+                    <td>
+                        <img src="${drink.pathImage}" alt="${drink.drinkName}" height="192px" width="150px">
                     </td>
                     <td>
                             ${drink.recipe}

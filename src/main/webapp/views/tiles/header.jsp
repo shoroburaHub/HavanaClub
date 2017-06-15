@@ -14,11 +14,11 @@
 <header class="header" role="banner">
     <nav>
         <ul>
-            <li>
-                <sec:authentication property="name"/>
-            </li>
             <li class="active">
                 <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/random">random</a>
             </li>
             <sec:authorize access="hasAnyRole('ROLE_USER')">
                 <li class="active">
@@ -48,7 +48,7 @@
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
                 <li>
-                    <form:form action="/logout" method="post">
+                    <form:form action="/logout" method="post" cssStyle="float: right">
                         <button class="btn btn-default">logout</button>
                     </form:form>
                 </li>

@@ -17,10 +17,10 @@ public interface DrinkDao extends JpaRepository<Drink, Integer>{
 	Page<Drink> drinksWithIngredientsPages(Pageable pageable);
 
 	@Query("select distinct d from Drink d left join fetch d.ingredients")
-	List<Drink> drinksWithIngredients();
+	List<Drink> drinkWithIngredients();
 
 	@Query("select distinct d from Drink d left join fetch d.ingredients where d.id=:id")
-	Drink drinksWithIngredients(@Param("id") int id);
+	Drink drinkWithIngredients(@Param("id") int id);
 
 	@Query("select distinct d from Drink d left join fetch d.users where d.id=:id")
 	Drink drinksWithUsers(@Param("id") int id);

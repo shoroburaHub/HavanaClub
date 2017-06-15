@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -70,9 +71,9 @@ public class DrinkServiceImpl implements DrinkService {
         drinkDao.delete(id);
     }
 
-    public List<Drink> drinkWithIngredients() {
+    public List<Drink> drinkWithIngredientsParsed() {
 
-        List<Drink> drinks = drinkDao.drinksWithIngredients();
+        List<Drink> drinks = drinkDao.drinkWithIngredients();
 
         for (Drink drink : drinks) {
 
@@ -96,8 +97,13 @@ public class DrinkServiceImpl implements DrinkService {
     }
 
     @Override
-    public Drink drinkWithIngredients(int id) {
-        Drink drink = drinkDao.drinksWithIngredients(id);
+    public Drink drinkWithIngredientsParsed(int id) {
+
+        System.out.println("id = " + id);
+
+        Drink drink = drinkDao.drinkWithIngredients(id);
+
+        System.out.println("drink = " + drink);
 
         String recipe = drink.getRecipe();
 
@@ -117,9 +123,13 @@ public class DrinkServiceImpl implements DrinkService {
     }
 
     @Override
-    public Drink drinkWithAllInfo(int id) {
+    public Drink drinkWithIngredients(int id) {
+        return drinkDao.drinkWithIngredients(id);
+    }
 
-        Drink drink = drinkDao.drinksWithIngredients(id);
+    @Override
+    public Drink drinkWithAllInfo(int id) {
+        Drink drink = drinkDao.drinkWithIngredients(id);
         Drink drink1 = drinkDao.drinksWithUsers(id);
 
         Drink returnedDrink = new Drink();
@@ -148,7 +158,27 @@ public class DrinkServiceImpl implements DrinkService {
             System.out.println("error with file");
         }
 
+        Iterator<Ingredient> iterator = drink.getIngredients().iterator();
+
+        while (iterator.hasNext()) {
+
+            if (ingredients.contains(iterator.next().getId())) {
+
+            } else {
+                iterator.remove();
+            }
+
+        }
+
         drinkDao.save(drink);
 
+    }
+
+    @Override
+    public int random() {
+
+        List<Drink> drinks = drinkDao.drinkWithIngredients();
+
+        return drinks.get((int)(Math.random()*drinks.size())).getId();
     }
 }

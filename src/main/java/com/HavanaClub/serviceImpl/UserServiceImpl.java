@@ -3,12 +3,10 @@ package com.HavanaClub.serviceImpl;
 import com.HavanaClub.dao.DrinkDao;
 import com.HavanaClub.dao.UserDao;
 import com.HavanaClub.entity.Drink;
-import com.HavanaClub.entity.Ingredient;
 import com.HavanaClub.entity.Role;
 import com.HavanaClub.entity.User;
 import com.HavanaClub.service.UserService;
 import com.HavanaClub.validator.Validator;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,9 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.List;
-import java.util.Set;
 
 @Service("userDetailsService")
 public class UserServiceImpl implements UserService, UserDetailsService{
@@ -84,7 +80,7 @@ public class UserServiceImpl implements UserService, UserDetailsService{
         for (Drink drink : user.getDrinks()) {
             returnedUser.getDrinks().get(counter)
                     .setIngredients(drinkDao
-                            .drinksWithIngredients(drink.getId())
+                            .drinkWithIngredients(drink.getId())
                             .getIngredients());
             counter++;
         }

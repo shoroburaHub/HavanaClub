@@ -20,11 +20,15 @@ public interface DrinkService {
 
     void delete(int id);
 
-    List<Drink> drinkWithIngredients();
+    List<Drink> drinkWithIngredientsParsed();
 
     Drink drinkWithIngredients(int id);
+
+    Drink drinkWithIngredientsParsed(int id);
 
     Drink drinkWithAllInfo(int id);
 
     void updateDrink(Drink drink, MultipartFile image, ArrayList<Integer> ingredients);
+
+    int random();
 }

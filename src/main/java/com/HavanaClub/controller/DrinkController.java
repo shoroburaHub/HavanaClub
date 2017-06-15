@@ -33,7 +33,7 @@ public class DrinkController {
     @GetMapping("/drink")
     public String drink(Model model) {
 
-        model.addAttribute("drinks", drinkService.drinkWithIngredients());
+        model.addAttribute("drinks", drinkService.drinkWithIngredientsParsed());
         model.addAttribute("countries", countryService.findAll());
         model.addAttribute("ingredients", ingredientService.findAll());
         model.addAttribute("drink", new Drink());
@@ -79,8 +79,6 @@ public class DrinkController {
                               @RequestParam MultipartFile image,
                               @RequestParam ArrayList<Integer> ingredients){
 
-
-        System.out.println("ingredients = " + ingredients);
         Drink drink = drinkService.drinkWithIngredients(id);
         drink.setDrinkName(drinkName);
         drink.setRecipe(recipe);

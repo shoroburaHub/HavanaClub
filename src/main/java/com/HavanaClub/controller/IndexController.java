@@ -1,7 +1,6 @@
 package com.HavanaClub.controller;
 
 import com.HavanaClub.service.DrinkService;
-import com.HavanaClub.service.IngredientService;
 import com.HavanaClub.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -21,9 +20,6 @@ public class IndexController {
     private DrinkService drinkService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private IngredientService ingredientService;
-
 
     @GetMapping("/")
     public String index(Model model, Principal principal, @PageableDefault Pageable pageable) {
@@ -56,11 +52,16 @@ public class IndexController {
     @GetMapping("/recipe/{id}")
     public String recipe(Model model, @PathVariable int id){
 
-        model.addAttribute("drink", drinkService.drinkWithIngredients(id));
+        model.addAttribute("drink", drinkService.drinkWithIngredientsParsed(id));
 
         return "views-base-drinkWithRecipe";
 
     }
 
+    @GetMapping("/random")
+    public String random(Model model){
+        model.addAttribute("drink", drinkService.drinkWithIngredientsParsed(drinkService.random()));
+        return "views-base-random";
+    }
 
 }
