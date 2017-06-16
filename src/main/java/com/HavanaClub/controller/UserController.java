@@ -28,8 +28,6 @@ public class UserController {
     @Qualifier("userLoginValidator")
     private Validator validator;
 
-
-
     @GetMapping("/signUp")
     public String signUp(Model model) {
         model.addAttribute("user", new User());

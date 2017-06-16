@@ -16,9 +16,10 @@
         <tr>
             <c:if test="${userBasket.drinks.size() != 0}">
                 <th>drink name</th>
+                <th></th>
                 <th>ingredients</th>
                 <th>drink recipe</th>
-                <th>delete from basket</th>
+                <th></th>
                 <th>
                     <form:form action="/buy" method="post">
                         <button class="btn btn-default">buy</button>
@@ -37,6 +38,9 @@
             <tr>
                 <td>
                         ${drink.drinkName}
+                </td>
+                <td>
+                    <img src="${drink.pathImage}" alt="${drink.drinkName}" height="192px" width="150px">
                 </td>
                 <td>
                     <c:forEach items="${drink.ingredients}" var="ingredient">

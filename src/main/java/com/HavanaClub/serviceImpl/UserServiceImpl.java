@@ -71,9 +71,13 @@ public class UserServiceImpl implements UserService, UserDetailsService{
         returnedUser.setName(user.getName());
 
         for (int i = 0; i < user.getDrinks().size(); i++) {
-            returnedUser.getDrinks().add(new Drink(user.getDrinks().get(i).getId(),
+            Drink drink = new Drink(user.getDrinks().get(i).getId(),
                     user.getDrinks().get(i).getDrinkName(),
-                    user.getDrinks().get(i).getRecipe()));
+                    user.getDrinks().get(i).getRecipe());
+
+            drink.setPathImage(user.getDrinks().get(i).getPathImage());
+
+            returnedUser.getDrinks().add(drink);
         }
 
         int counter = 0;

@@ -16,7 +16,7 @@
         <security:intercept-url pattern="/country" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/drink" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/ingredient" access="hasRole('ROLE_ADMIN')"/>
-        <security:intercept-url pattern="/profile" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/profile" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/updateDrink" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/updateIngredient" access="hasRole('ROLE_ADMIN')"/>
 
