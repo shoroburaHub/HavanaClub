@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface CountryService {
 
-	void save(Country country, MultipartFile image);
+	void save(Country country, List<MultipartFile> image);
 
 	List<Country> findAll();
 
@@ -17,5 +17,7 @@ public interface CountryService {
 	void delete(int id);
 
 	void update(Country country, MultipartFile image);
+
+	List<Country> countriesWithImages();
 	
 }

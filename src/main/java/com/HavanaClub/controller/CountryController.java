@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Controller
 public class CountryController {
 
@@ -16,7 +18,7 @@ public class CountryController {
 
     @GetMapping("/country")
     public String country(Model model) {
-        model.addAttribute("countries", countryService.findAll());
+        model.addAttribute("countries", countryService.countriesWithImages());
         model.addAttribute("country", new Country());
         return "views-admin-country";
     }
@@ -24,9 +26,9 @@ public class CountryController {
     @PostMapping("/country")
     public String country(@ModelAttribute Country country,
                           Model model,
-                          @RequestParam("image") MultipartFile image) {
+                          @RequestParam("images") List<MultipartFile> images) {
 
-        countryService.save(country, image);
+        countryService.save(country, images);
 
 
         return "redirect:/country";

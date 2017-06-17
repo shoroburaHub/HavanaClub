@@ -29,13 +29,13 @@
             </thead>
             <tbody>
 
-            <c:forEach var="ingredient" items="${ingredients.content}">
+            <c:forEach var="country" items="${ingredients.content}">
                 <tr>
                     <td>
-                            ${ingredient.ingredientName}
+                            ${country.ingredientName}
                     </td>
                     <td>
-                        <a href="deleteIngredient/${ingredient.id}">delete</a>
+                        <a href="deleteIngredient/${country.id}">delete</a>
                     </td>
                 </tr>
             </c:forEach>

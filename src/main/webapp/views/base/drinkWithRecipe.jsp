@@ -23,8 +23,8 @@
                 ${drink.drinkName}
             </td>
             <td>
-                <c:forEach items="${drink.ingredients}" var="ingredient">
-                    ${ingredient.ingredientName} <br>
+                <c:forEach items="${drink.ingredients}" var="country">
+                    ${country.ingredientName} <br>
                 </c:forEach>
             </td>
             <td>

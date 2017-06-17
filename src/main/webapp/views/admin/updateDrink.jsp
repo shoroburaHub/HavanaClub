@@ -36,8 +36,8 @@
                         <input name="recipe" type="textarea" value="${drink.recipe}" class="form-control"/>
                     </td>
                     <td>
-                        <c:forEach items="${drink.ingredients}" var="ingredient">
-                            <input type="checkbox" name="ingredients" checked="checked" value="${ingredient.id}">${ingredient.ingredientName}<br>
+                        <c:forEach items="${drink.ingredients}" var="country">
+                            <input type="checkbox" name="ingredients" checked="checked" value="${country.id}">${country.ingredientName}<br>
                         </c:forEach>
                     </td>
                 </tr>

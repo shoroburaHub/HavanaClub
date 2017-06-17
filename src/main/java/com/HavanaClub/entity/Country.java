@@ -13,10 +13,11 @@ public class Country {
 
 	private String name;
 
-	private String pathImage;
-
 	@OneToMany(mappedBy = "country")
 	private List<Drink> drinks = new ArrayList<Drink>();
+
+	@OneToMany(mappedBy = "country",cascade = CascadeType.REMOVE)
+	private List<CountryImages> countryImages = new ArrayList<>();
 
 	public Country() {
 		// TODO Auto-generated constructor stub
@@ -50,11 +51,11 @@ public class Country {
 		this.drinks = drinks;
 	}
 
-	public String getPathImage() {
-		return pathImage;
+	public List<CountryImages> getCountryImages() {
+		return countryImages;
 	}
 
-	public void setPathImage(String pathImage) {
-		this.pathImage = pathImage;
+	public void setCountryImages(List<CountryImages> countryImages) {
+		this.countryImages = countryImages;
 	}
 }

@@ -1,8 +1,10 @@
 package com.HavanaClub.serviceImpl;
 
 import com.HavanaClub.dao.CountryDao;
+import com.HavanaClub.dao.CountryImagesDao;
 import com.HavanaClub.dao.DrinkDao;
 import com.HavanaClub.entity.Country;
+import com.HavanaClub.entity.CountryImages;
 import com.HavanaClub.entity.Drink;
 import com.HavanaClub.service.CountryService;
 import org.apache.commons.io.FileUtils;
@@ -21,22 +23,38 @@ public class CountryServiceImpl implements CountryService{
 	private CountryDao countryDao;
 	@Autowired
 	private DrinkDao drinkDao;
+	@Autowired
+	private CountryImagesDao countryImagesDao;
 
-	public void save(Country country, MultipartFile image){
+	public void save(Country country, List<MultipartFile> images){
 
-		String path = System.getProperty("catalina.home") + "/resources/"
-				+ country.getName() + "/" + image.getOriginalFilename();
+		countryDao.saveAndFlush(country);
 
-		country.setPathImage("resources/" + country.getName() + "/"
-				+ image.getOriginalFilename());
+		for (MultipartFile multipartFile : images) {
 
-		File filePath = new File(path);
+			String path = "C:\\workspace\\apache-tomcat-8.0.33\\resources\\"
+					+ country.getName() + "\\" + multipartFile.getOriginalFilename();
 
-		try {
-			filePath.mkdirs();
-			image.transferTo(filePath);
-		} catch (IOException e) {
-			System.out.println("error with file");
+			CountryImages countryImages =
+					new CountryImages("resources/" + country.getName() + "/"
+					+ multipartFile.getOriginalFilename());
+
+			countryImagesDao.saveAndFlush(countryImages);
+
+			countryImages.setCountry(country);
+
+			File filePath = new File(path);
+
+			if(!filePath.exists()){
+				filePath.mkdirs();
+			}
+
+			try {
+				multipartFile.transferTo(filePath);
+			} catch (IOException e) {
+				System.out.println("error with file");
+			}
+			countryImagesDao.save(countryImages);
 		}
 
 		countryDao.save(country);
@@ -71,7 +89,7 @@ public class CountryServiceImpl implements CountryService{
 		String path = System.getProperty("catalina.home") + "/resources/"
 				+ country.getName() + "/" + image.getOriginalFilename();
 
-		country.setPathImage("resources/" + country.getName() + "/" + image.getOriginalFilename());
+//		country.setPathImage("resources/" + country.getName() + "/" + image.getOriginalFilename());
 
 		File filePath = new File(path);
 
@@ -91,4 +109,8 @@ public class CountryServiceImpl implements CountryService{
 		countryDao.save(country);
 	}
 
+	@Override
+	public List<Country> countriesWithImages() {
+		return countryDao.countriesWithImages();
+	}
 }
