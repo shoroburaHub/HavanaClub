@@ -19,7 +19,6 @@ public class CountryController {
     @GetMapping("/country")
     public String country(Model model) {
         model.addAttribute("countries", countryService.countriesWithImages());
-        model.addAttribute("country", new Country());
         return "views-admin-country";
     }
 
