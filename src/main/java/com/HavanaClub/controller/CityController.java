@@ -12,32 +12,27 @@ import java.util.List;
 /**
  * Created by admin on 6/19/2017.
  */
-@Controller
+@RestController
 public class CityController {
 
     @Autowired
     private CityService cityService;
 
-    @GetMapping("/city")
-    public String city() {
-        return "views-admin-city";
-    }
-
-    @PostMapping("/saveCity")
-    public @ResponseBody List<City> saveCity(@RequestBody City city) {
+    @PostMapping("/city")
+    public List<City> saveCity(@RequestBody City city) {
 
         cityService.save(city);
 
         return cityService.findAll();
     }
 
-    @GetMapping("/loadCities")
-    public @ResponseBody List<City> loadCities(){
+    @GetMapping("/city")
+    public List<City> loadCities(){
         return cityService.findAll();
     }
 
-    @DeleteMapping("/deleteCity")
-    public @ResponseBody List<City> deleteCity(@RequestBody String idCity){
+    @DeleteMapping("/city")
+    public List<City> deleteCity(@RequestBody String idCity){
 
         cityService.delete(Integer.valueOf(idCity));
 

@@ -64,4 +64,10 @@ public class IndexController {
         return "views-base-random";
     }
 
+    @GetMapping("/openCityView")
+    public String city(){
+        return "views-admin-city";
+    }
+
+
 }
