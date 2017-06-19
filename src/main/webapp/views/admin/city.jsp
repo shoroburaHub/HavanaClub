@@ -37,3 +37,32 @@
        value="${_csrf.parameterName}" />
 <input type="hidden" name="csrf_value"
        value="${_csrf.token}" />
+
+<script>
+
+    $('#saveCity').click(function () {
+
+        var city = {
+            name : $('#cityName').val()
+        };
+
+        $.ajax({
+
+            url : '/city?'+ $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
+            method : 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'json',
+            data: JSON.stringify(country),
+            success: function (res) {
+
+            }
+
+
+
+        })
+
+    })
+
+
+
+</script>
