@@ -15,5 +15,5 @@ public interface CityService {
 
     void delete(int id);
 
-
+    void update(String info);
 }

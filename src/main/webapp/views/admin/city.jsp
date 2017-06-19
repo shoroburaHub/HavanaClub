@@ -23,6 +23,7 @@
             <thead>
             <tr>
                 <th>name</th>
+                <th>update</th>
                 <th>delete</th>
             </tr>
             </thead>

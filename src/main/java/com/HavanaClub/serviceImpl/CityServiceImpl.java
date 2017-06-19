@@ -31,4 +31,15 @@ public class CityServiceImpl implements CityService {
     public void delete(int id) {
         cityDao.delete(id);
     }
+
+    @Override
+    public void update(String info) {
+
+        City city = cityDao.findOne(Integer.parseInt(info.split("_")[1]));
+
+        city.setName(info.split("_")[0]);
+
+        cityDao.save(city);
+
+    }
 }

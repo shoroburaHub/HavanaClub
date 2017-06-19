@@ -38,5 +38,12 @@ public class CityController {
 
         return cityService.findAll();
     }
+    @PutMapping("/city")
+    public List<City> updateCity(@RequestBody String info){
+
+        cityService.update(info);
+
+        return cityService.findAll();
+    }
 
 }
