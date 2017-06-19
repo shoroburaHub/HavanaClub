@@ -2,18 +2,16 @@
   Created by IntelliJ IDEA.
   User: admin
   Date: 6/19/2017
-  Time: 5:44 PM
+  Time: 8:44 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <div class="container">
-
-
     <div class="panel">
             <div style="display: flex; justify-content: space-around ">
 
                 <div class="form-group">
+
                     <input type="text" class="form-control" id="cityName"
                                 placeholder="city name"/>
                 </div>
@@ -25,6 +23,7 @@
             <thead>
             <tr>
                 <th>name</th>
+                <th>delete</th>
             </tr>
             </thead>
             <tbody id="result">
@@ -38,31 +37,6 @@
 <input type="hidden" name="csrf_value"
        value="${_csrf.token}" />
 
-<script>
-
-    $('#saveCity').click(function () {
-
-        var city = {
-            name : $('#cityName').val()
-        };
-
-        $.ajax({
-
-            url : '/city?'+ $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
-            method : 'POST',
-            contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            data: JSON.stringify(country),
-            success: function (res) {
-
-            }
+<script src="/js/city.js"></script>
 
 
-
-        })
-
-    })
-
-
-
-</script>

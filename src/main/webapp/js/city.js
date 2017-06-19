@@ -4,30 +4,77 @@
 
 $('#saveCity').click(function () {
 
-    console.log('click')
+    var city = {
+        name: $('#cityName').val()
+    };
 
-});
-
-// loadCities();
-
-function loadCities() {
-
-    console.log(11111)
+    $('#cityName').val('');
 
     $.ajax({
 
-        url : '/city?'+ $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
-        method : 'GET',
-        success : function (res) {
-            console.log(res);
+        url: '/saveCity?' + $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
+        method: 'POST',
+        dataType: 'json',
+        contentType: 'application/json; charset=UTF-8',
+        data: JSON.stringify(city),
+        success: function (res) {
+
+            var citiesFromDb = '';
+
+            for(var i in res){
+
+                citiesFromDb += '<tr><td>'+res[i].name+'</td><td><button class="btn btn-default" id="deleteCity">save city</button></td></tr>';
+
+            }
+
+            document.getElementById('result').innerHTML = citiesFromDb;
+
         },
-        error : function (err) {
-            console.log(err);
+        error: function (err) {
+            console.log(err)
         }
+    })
+});
 
-    });
 
+function loadCities() {
+    $.ajax({
+
+        url: '/loadCities?' + $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
+        method: 'GET',
+        success: function (res) {
+            var citiesFromDb = '';
+            for(var i in res){
+                citiesFromDb += '<tr><td>'+res[i].name+'</td><td><button class="btn btn-default" id="deleteCity" onclick="deleteCity('+res[i].id+')">delete</button></td></tr>';
+            }
+            document.getElementById('result').innerHTML = citiesFromDb;
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+
+};
+
+loadCities();
+
+function deleteCity(idCity) {
+
+    $.ajax({
+
+        url: '/deleteCity?' + $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
+        method: 'DELETE',
+        data: JSON.stringify(idCity),
+        success: function (res) {
+            var citiesFromDb = '';
+            for(var i in res){
+                citiesFromDb += '<tr><td>'+res[i].name+'</td><td><button class="btn btn-default" id="deleteCity" onclick="deleteCity('+res[i].id+')">delete</button></td></tr>';
+            }
+            document.getElementById('result').innerHTML = citiesFromDb;
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
 
 }
-
-
