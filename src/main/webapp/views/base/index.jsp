@@ -17,9 +17,8 @@
                 <th>ingredients</th>
                 <th>
                     <div class="form-group; col-lg-10">
-                        <label class="sr-only" for="search">Email address</label>
                         <input type="text" class="form-control" id="search"
-                               placeholder="search"/>
+                               placeholder="search" oninput="search()"/>
                     </div>
                 </th>
             </tr>
@@ -85,3 +84,4 @@
         </div>
     </div>
 </div>
+<script src="/js/speedSearch.js"></script>

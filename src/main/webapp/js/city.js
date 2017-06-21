@@ -18,14 +18,7 @@ $('#saveCity').click(function () {
         contentType: 'application/json; charset=UTF-8',
         data: JSON.stringify(city),
         success: function (res) {
-            var citiesFromDb = '';
-
-            for (var i in res) {
-                citiesFromDb += '<tr><td id=' + res[i].id + "city" + '>' + res[i].name + '</td><td><button class="btn btn-default updateCity '+res[i].id+'" onclick="updateCity(' + res[i].id + ')">update</button></td><td><button class="btn btn-default" id="deleteCity" onclick="deleteCity(' + res[i].id + ')">delete</button></td></tr>';
-            }
-
-            document.getElementById('result').innerHTML = citiesFromDb;
-
+            parseResultFromDb(res);
         },
         error: function (err) {
             console.log(err)
@@ -44,11 +37,7 @@ function deleteCity(idCity) {
         method: 'DELETE',
         data: JSON.stringify(idCity),
         success: function (res) {
-            var citiesFromDb = '';
-            for (var i in res) {
-                citiesFromDb += '<tr><td id=' + res[i].id + "city" + '>' + res[i].name + '</td><td><button class="btn btn-default updateCity '+res[i].id+'" onclick="updateCity(' + res[i].id + ')">update</button></td><td><button class="btn btn-default" id="deleteCity" onclick="deleteCity(' + res[i].id + ')">delete</button></td></tr>';
-            }
-            document.getElementById('result').innerHTML = citiesFromDb;
+            parseResultFromDb(res);
         },
         error: function (err) {
             console.log(err)
@@ -63,11 +52,7 @@ function loadCities() {
         url: '/city?' + $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
         method: 'GET',
         success: function (res) {
-            var citiesFromDb = '';
-            for (var i in res) {
-                citiesFromDb += '<tr><td id=' + res[i].id + "city" + '>' + res[i].name + '</td><td><button class="btn btn-default updateCity '+res[i].id+'" onclick="updateCity(' + res[i].id + ')">update</button></td><td><button class="btn btn-default" id="deleteCity" onclick="deleteCity(' + res[i].id + ')">delete</button></td></tr>';
-            }
-            document.getElementById('result').innerHTML = citiesFromDb;
+            parseResultFromDb(res);
         },
         error: function (err) {
             console.log(err)
@@ -88,7 +73,7 @@ function updateCity(idCity) {
             for (var i in res) {
 
                 if(res[i].id == idCity){
-                    citiesFromDb += '<tr><td><input type="text" class="form-control" placeholder="'+res[i].name+'" id="newCityName"></td><td><button class="btn btn-default save" onclick="saveCityUpdates(' + res[i].id + ')">save updates</button></td></tr>';
+                    citiesFromDb += '<tr><td><input type="text" class="form-control" value="'+res[i].name+'" id="newCityName"></td><td><button class="btn btn-default save" onclick="saveCityUpdates(' + res[i].id + ')">save updates</button></td></tr>';
                 }else{
                     citiesFromDb += '<tr><td id=' + res[i].id + "city" + '>' + res[i].name + '</td><td></td></tr>';
                 }
@@ -112,18 +97,24 @@ function saveCityUpdates(idCity) {
         method: 'PUT',
         data: newName+'_'+idCity,
         success: function (res) {
-            var citiesFromDb = '';
 
-            for (var i in res) {
-                citiesFromDb += '<tr><td id=' + res[i].id + "city" + '>' + res[i].name + '</td><td><button class="btn btn-default updateCity '+res[i].id+'" onclick="updateCity(' + res[i].id + ')">update</button></td><td><button class="btn btn-default" id="deleteCity" onclick="deleteCity(' + res[i].id + ')">delete</button></td></tr>';
-            }
-
-            document.getElementById('result').innerHTML = citiesFromDb;
+            parseResultFromDb(res);
 
         },
         error: function (err) {
             console.log(err)
         }
     })
+
+}
+
+function parseResultFromDb(res) {
+    var citiesFromDb = '';
+
+    for (var i in res) {
+        citiesFromDb += '<tr><td id=' + res[i].id + "city" + '>' + res[i].name + '</td><td><button class="btn btn-default updateCity '+res[i].id+'" onclick="updateCity(' + res[i].id + ')">update</button></td><td><button class="btn btn-default" id="deleteCity" onclick="deleteCity(' + res[i].id + ')">delete</button></td></tr>';
+    }
+
+    document.getElementById('result').innerHTML = citiesFromDb;
 
 }
