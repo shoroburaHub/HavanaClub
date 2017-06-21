@@ -1,5 +1,7 @@
 package com.HavanaClub.controller;
 
+import com.HavanaClub.dto.DrinkDto;
+import com.HavanaClub.dto.DtoUtilMapper;
 import com.HavanaClub.editors.CountryEditor;
 import com.HavanaClub.entity.Country;
 import com.HavanaClub.entity.Drink;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class DrinkController {
@@ -86,6 +89,15 @@ public class DrinkController {
         drinkService.updateDrink(drink,image,ingredients);
 
         return "redirect:/drink";
+    }
+
+    @PostMapping("/searchDrink")
+    public @ResponseBody List<DrinkDto> searchDrink(@RequestBody String search){
+        System.out.println("search = " + search);
+
+        System.out.println(drinkService.searchDrinks(search));
+
+        return DtoUtilMapper.drinksToDrinksDtos(drinkService.searchDrinks(search));
     }
 
 }

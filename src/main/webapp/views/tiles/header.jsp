@@ -2,7 +2,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-
 <%--
   Created by IntelliJ IDEA.
   User: admin

@@ -11,7 +11,6 @@ $('#saveCity').click(function () {
     $('#cityName').val('');
 
     $.ajax({
-
         url: '/city?' + $('input[name=csrf_name]').val() + "=" + $('input[name=csrf_value]').val(),
         method: 'POST',
         dataType: 'json',

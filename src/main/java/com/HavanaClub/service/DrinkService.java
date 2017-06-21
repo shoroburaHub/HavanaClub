@@ -31,4 +31,7 @@ public interface DrinkService {
     void updateDrink(Drink drink, MultipartFile image, ArrayList<Integer> ingredients);
 
     int random();
+
+    List<Drink> searchDrinks(String search);
+
 }

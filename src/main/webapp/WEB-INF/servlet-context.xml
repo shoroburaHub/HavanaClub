@@ -67,9 +67,4 @@
         <ref bean="localeChangeInterceptor"/>
     </mvc:interceptors>
 
-
-
-
-
-
 </beans>

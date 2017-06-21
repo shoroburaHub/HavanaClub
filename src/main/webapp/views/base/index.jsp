@@ -17,13 +17,13 @@
                 <th>ingredients</th>
                 <th>
                     <div class="form-group; col-lg-10">
-                        <input type="text" class="form-control" id="search"
+                        <input type="text" class="form-control" id="searchIn"
                                placeholder="search" oninput="search()"/>
                     </div>
                 </th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="indexResult">
             <c:forEach var="drink" items="${drinks.content}">
                 <tr>
                     <td>
@@ -84,4 +84,10 @@
         </div>
     </div>
 </div>
+
+<input type="hidden" name="csrf_name"
+       value="${_csrf.parameterName}" />
+<input type="hidden" name="csrf_value"
+       value="${_csrf.token}" />
+
 <script src="/js/speedSearch.js"></script>

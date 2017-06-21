@@ -177,4 +177,9 @@ public class DrinkServiceImpl implements DrinkService {
 
         return drinks.get((int)(Math.random()*drinks.size())).getId();
     }
+
+    @Override
+    public List<Drink> searchDrinks(String search) {
+        return drinkDao.searchDrinks(search);
+    }
 }
