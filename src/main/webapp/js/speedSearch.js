@@ -11,14 +11,21 @@ function search() {
         data: $('#searchIn').val(),
         success: function (res) {
 
-            console.log(res);
+            // console.log(res);
 
-            // var drinks = '';
-            //
-            // for (var i in res) {
-            //     drinks += res[i].name + '<br>'
-            // }
-            // document.getElementById('indexResult').innerHTML = drinks;
+            var drinks = '';
+
+            for (var i in res) {
+
+                var ingredints = '';
+
+                for(var j in res[i].ingredients){
+                    ingredints += res[i].ingredients[j].ingredientName+'<br>';
+                }
+
+                drinks += '<tr><td>' + res[i].drinkName + '</td><td><img src="'+res[i].pathImage+'" alt="'+res[i].pathImage+'" height="192px" width="150px"></td><td>'+ingredints+'</td><td><a href="recipe/"'+ res[i].id+'>recipe</a></td></tr>';
+            }
+            document.getElementById('indexResult').innerHTML = drinks;
         }
 
     })

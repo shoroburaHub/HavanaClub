@@ -1,9 +1,8 @@
 package com.HavanaClub.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by admin on 6/19/2017.
@@ -15,6 +14,14 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private double locationLat;
+    private double locationLng;
+
+    @ManyToMany
+    @JoinTable(name = "drink_ingredient",
+            joinColumns = @JoinColumn(name = "id_city"),
+            inverseJoinColumns = @JoinColumn(name = "id_bar"))
+    private List<Bar> bars = new ArrayList<>();
 
     public City() {
     }
@@ -33,6 +40,30 @@ public class City {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getLocationLat() {
+        return locationLat;
+    }
+
+    public void setLocationLat(double locationLat) {
+        this.locationLat = locationLat;
+    }
+
+    public double getLocationLng() {
+        return locationLng;
+    }
+
+    public void setLocationLng(double locationLng) {
+        this.locationLng = locationLng;
+    }
+
+    public List<Bar> getBars() {
+        return bars;
+    }
+
+    public void setBars(List<Bar> bars) {
+        this.bars = bars;
     }
 
     @Override

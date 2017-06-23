@@ -93,10 +93,6 @@ public class DrinkController {
 
     @PostMapping("/searchDrink")
     public @ResponseBody List<DrinkDto> searchDrink(@RequestBody String search){
-        System.out.println("search = " + search);
-
-        System.out.println(drinkService.searchDrinks(search));
-
         return DtoUtilMapper.drinksToDrinksDtos(drinkService.searchDrinks(search));
     }
 

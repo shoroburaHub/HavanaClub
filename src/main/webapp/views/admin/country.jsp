@@ -40,21 +40,21 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="country" items="${countries}">
+            <c:forEach var="ingredient" items="${countries}">
                 <tr>
                     <td>
-                            ${country.name}
+                            ${ingredient.name}
                     </td>
-                    <c:forEach var="img" items="${country.countryImages}">
+                    <c:forEach var="img" items="${ingredient.countryImages}">
                         <td>
                             <img src="${img.pathImage}" alt="${img.pathImage}" height="192px" width="150px">
                         </td>
                     </c:forEach>
                     <td>
-                        <a href="/updateCountry/${country.id}">update</a>
+                        <a href="/updateCountry/${ingredient.id}">update</a>
                     </td>
                     <td>
-                        <a href="deleteCountry/${country.id}">delete</a>
+                        <a href="deleteCountry/${ingredient.id}">delete</a>
                     </td>
                 </tr>
             </c:forEach>
