@@ -21,6 +21,22 @@
                                placeholder="search" oninput="search()"/>
                     </div>
                 </th>
+                <th>
+                    <div class="form-group; col-lg-10">
+                        <div id="rangeValue" style="text-align: center">0</div>
+                        <input type="range" min="0" max="1000" value="0" step="10" class="form-control" id="rangePrice"
+                               oninput="filter()"/>
+                    </div>
+                </th>
+                <th>
+                    <div class="form-group; col-lg-10">
+                        <label for="notAlco">not alcohol</label>
+                        <input type="radio" name="alco" id="notAlco" value="notAlco" onchange="filter()"/>
+                        <br>
+                        <label for="alco">alcohol</label>
+                        <input type="radio" name="alco" id="alco" value="alco" onchange="filter()"/>
+                    </div>
+                </th>
             </tr>
             </thead>
             <tbody id="indexResult">
@@ -86,8 +102,9 @@
 </div>
 
 <input type="hidden" name="csrf_name"
-       value="${_csrf.parameterName}" />
+       value="${_csrf.parameterName}"/>
 <input type="hidden" name="csrf_value"
-       value="${_csrf.token}" />
+       value="${_csrf.token}"/>
 
 <script src="/js/speedSearch.js"></script>
+<script src="/js/range.js"></script>

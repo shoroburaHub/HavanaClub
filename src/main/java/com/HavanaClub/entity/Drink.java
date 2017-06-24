@@ -26,6 +26,11 @@ public class Drink {
     @ManyToOne
     private Country country;
 
+    private int price;
+    private boolean alcohol;
+
+
+
     @ManyToMany
     @JoinTable(name = "orders_drink", joinColumns = @JoinColumn(name = "drink_id"), inverseJoinColumns = @JoinColumn(name = "orders_id"))
     private List<Orders> orders = new ArrayList<Orders>();
@@ -125,8 +130,17 @@ public class Drink {
         return "Drink{" +
                 "id=" + id +
                 ", drinkName='" + drinkName + '\'' +
-                ", recipe='" + recipe + '\'' +
+                ", price=" + price +
+                ", alcohol=" + alcohol +
                 '}';
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     @Override

@@ -28,4 +28,10 @@ public interface DrinkDao extends JpaRepository<Drink, Integer>{
 	@Query("select distinct d from Drink d left join fetch d.ingredients where d.drinkName like %:search%")
 	List<Drink> searchDrinks(@Param("search") String search);
 
+	@Query("select distinct d from Drink d left join fetch d.ingredients where d.alcohol  = true")
+	List<Drink> findByAlcoholTrue();
+
+	@Query("select distinct d from Drink d left join fetch d.ingredients where d.alcohol = false")
+	List<Drink> findByAlcoholFalse();
+
 }

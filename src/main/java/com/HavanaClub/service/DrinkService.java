@@ -34,4 +34,6 @@ public interface DrinkService {
 
     List<Drink> searchDrinks(String search);
 
+    List<Drink> filterByAlcohol(String alco);
+
 }

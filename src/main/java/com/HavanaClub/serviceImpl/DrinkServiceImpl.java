@@ -182,4 +182,15 @@ public class DrinkServiceImpl implements DrinkService {
     public List<Drink> searchDrinks(String search) {
         return drinkDao.searchDrinks(search);
     }
+
+    @Override
+    public List<Drink> filterByAlcohol(String alco) {
+        if(alco.equals("notAlco")){
+            System.out.println("notAlco = " + alco);
+            return drinkDao.findByAlcoholFalse();
+        }else{
+            System.out.println("alco = "+alco);
+            return drinkDao.findByAlcoholTrue();
+        }
+    }
 }
